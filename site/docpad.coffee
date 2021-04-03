@@ -5,7 +5,7 @@
 docpadConfig = {
 
   srcPath : './input'
-  outPath : '../docs'
+  outPath : './output'
 
   # env: 'production'
   regenerateDelay: 1,
