@@ -9,6 +9,8 @@
   <%- @getBlock('styles').toHTML() %>
   <%- @partial('ui-css') %>
   <%- @partial('css') %>
+
+  <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:700i|Fira+Sans" rel="stylesheet">
 </head>
 <body id="<%= @document.section %>" ontouchstart="">
   <h1><%= @getH1() %></h1>

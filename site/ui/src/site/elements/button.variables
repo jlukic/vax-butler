@@ -1,7 +1,16 @@
-@textTransform: uppercase;
+@textColor: #333333;
+@backgroundColor: #FAFAFA;
+
+@backgroundImage: linear-gradient(rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.04));
+@boxShadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
 @horizontalPadding: 1.8461em;
 @verticalPadding: 1.0714em;
 
+@coloredBoxShadow: @boxShadow;
+@coloredBackgroundImage: @backgroundImage;
+
+@invertedTextShadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
 
 @small: @12px;
 @medium: @13px;
@@ -9,23 +18,3 @@
 @big: @15px;
 @huge: @16px;
 
-
-@orBackgroundColor: #1B2A2E;
-@orTextColor: rgba(255, 255, 255, 0.6);
-
-@basicFontWeight: bold;
-@basicTextTransform: uppercase;
-@basicBorderSize: 2px;
-@basicColoredBorderSize: 2px;
-@basicBackground: @white;
-
-@teal: #1F5E5E;
-@tealHover: #277C75;
-@tealDown: #236C65;
-
-@yellow: #F3D68D;
-@yellowHover: #FFE195;
-@yellowDown: #DCC27C;
-@yellowTextColor: #4A4232;
-@yellowTextShadow: none;
-@yellowFocus: @yellowHover;

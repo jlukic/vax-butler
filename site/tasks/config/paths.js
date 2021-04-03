@@ -13,7 +13,7 @@ module.exports = {
       name: 'site.css',
       minifiedName: 'site.min.css',
       folder: 'input/files/dist/',
-      staticFolder: 'static/files/dist',
+      staticFolder: '../docs/files/dist',
     },
   },
   js: {

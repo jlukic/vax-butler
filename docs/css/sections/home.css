@@ -1,0 +1,41 @@
+#home aboveFold {
+  position: relative;
+  height: 450px;
+  padding: 7rem 0rem;
+}
+#home aboveFold img {
+  position: absolute;
+  right: 0rem;
+  top: -130px;
+  height: 600px;
+}
+#home aboveFold bg {
+  z-index: 1;
+  position: absolute;
+  transform-origin: 50% 50%;
+  top: -150%;
+  right: -50%;
+  width: 200%;
+  height: 250%;
+  border-radius: 100%;
+  pointer-events: none;
+  background-image: linear-gradient(180deg, #FFFFFF, #FFC9CA);
+}
+#home aboveFold .ui.container {
+  position: relative;
+  z-index: 2;
+}
+
+#home aboveFold copy {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+}
+#home aboveFold .header {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 48px;
+}
+#home aboveFold p {
+  font-size: 19px;
+  color: rgba(0, 0, 0, 0.7);
+}

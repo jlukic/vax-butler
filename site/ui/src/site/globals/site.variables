@@ -31,15 +31,20 @@
 /* Fonts */
 @importGoogleFonts : false;
 
-@pageHeaderFont    : 'Work Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@headerFont        : 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageHeaderFont    : 'Cormorant Garamond', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : 'Fira Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : 'Fira Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
 
 
 /*--------------
      Colors
 ---------------*/
+
+@primaryColor: #000000;
+@primaryColorHover: #EC5E5E;
+
+@secondaryColor: #8B4F80;
 
 /*--------------
      Loader
