@@ -13,10 +13,10 @@ h1           : 'Book NYC COVID-19 Vaccine'
         Page Name
       </h2>
       <p>
-        Text about the page
+        Vaccine butler helps you book a vaccine appointment through the official NYC vaccine without having to repeatedly refresh the page and hope an appointment appears.
       </p>
       <div class="ui primary button">
-        Test Button
+        Get Started
       </div>
     </div>
   </aboveFold>
