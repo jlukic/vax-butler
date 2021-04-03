@@ -90,6 +90,10 @@ docpadConfig = {
 
   plugins:
 
+    ghpages:
+      deployRemote: 'origin'
+      deployBranch: 'gh-pages'
+
     sitemap:
       cachetime: 600000
       changefreq: 'weekly'
