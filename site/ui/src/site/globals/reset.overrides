@@ -1,0 +1,72 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+* {
+  display: block;
+}
+
+col {
+  display: table-column;
+}
+colgroup {
+  display: table-column-group;
+}
+table {
+  display: table;
+}
+thead {
+  display: table-header-group;
+}
+th {
+  display: table-cell;
+}
+tbody {
+  display: table-row-group;
+}
+tr {
+  display: table-row;
+}
+td {
+  display: table-cell;
+}
+tfoot {
+  display: table-footer-group;
+}
+li {
+  display: list-item;
+}
+
+title,
+meta,
+style,
+script,
+link {
+  display: none;
+}
+
+input:not([type="hidden"]),
+select,
+svg,
+img {
+  display: inline-block;
+}
+
+small,
+sub,
+sup,
+hr,
+pre,
+span,
+a,
+b,
+strong,
+em,
+i,
+br,
+audio,
+canvas,
+progress,
+video {
+  display: inline;
+}

@@ -1,0 +1,28 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<% if 'development' in @getEnvironments(): %>
+  <script src="/ui/components/api.js"></script>
+  <script src="/ui/components/dropdown.js"></script>
+  <script src="/ui/components/embed.js"></script>
+  <script src="/ui/components/form.js"></script>
+  <script src="/ui/components/dimmer.js"></script>
+  <script src="/ui/components/modal.js"></script>
+  <script src="/ui/components/popup.js"></script>
+  <script src="/ui/components/transition.js"></script>
+  <script src="/ui/components/shape.js"></script>
+  <script src="/ui/components/sticky.js"></script>
+  <script src="/ui/components/tab.js"></script>
+  <script src="/ui/components/visibility.js"></script>
+  <script src="/ui/components/accordion.js"></script>
+<% else: %>
+  <script src="/dist/semantic.min.js?v=<%= @getVersion() %>"></script>
+<% end %>
+
+<script src="/dist/site.min.js?v=<%= @getVersion() %>"></script>
+
+<script type="text/javascript">
+(function(d,b,a,s,e){ var t = b.createElement(a),
+ fs = b.getElementsByTagName(a)[0]; t.async=1; t.id=e; t.src=s;
+ fs.parentNode.insertBefore(t, fs); })
+(window,document,'script','https://tag.demandbase.com/a99f7883dacfd8cf.min.js','demandbase_js_lib');
+</script>

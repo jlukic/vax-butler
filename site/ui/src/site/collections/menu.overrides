@@ -1,0 +1,8 @@
+
+.ui.text.menu .item {
+  text-transform: uppercase;
+}
+
+.ui.secondary.menu .item {
+  color: rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,8 @@
+---
+standalone : false
+---
+<% if @webp: %>
+  <img class="<%= @class %>" id="<%= @id %>" src="<%= @getWebpPath @src %>" onerror="this.onerror=null; this.src='<%= @src %>'" alt="<%= @alt %>">
+<% else: %>
+  <img class="<%= @class %>" src="<%= @src %>" srcset="<%= @srcset %>" alt="<%= @alt %>" id="<%= @id %>">
+<% end %>

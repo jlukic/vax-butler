@@ -1,0 +1,19 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@padding: 1.25em 2em;
+@boxShadow: 0 0px 14px 0 rgba(57,76,93,.13);
+
+@headerFontSize: 19px;
+@iconSize: 4em;
+
+@infoBackgroundColor: @white;
+@infoTextColor: rgba(0, 0, 0, 0.8);
+@infoHeaderColor: #5CA57E;
+@infoBoxShadow:
+  -4px 0px 0px 0px#4da678,
+  0 0px 14px 0 rgba(57,76,93,.13)
+;
+
+

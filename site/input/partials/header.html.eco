@@ -1,0 +1,5 @@
+<topBar class="<%= @type %>">
+  <div class="ui container">
+
+  </div>
+</topBar>

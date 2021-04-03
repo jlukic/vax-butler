@@ -1,0 +1,22 @@
+{
+  "version": "2.4.2",
+  "base": "ui/",
+  "permission": false,
+  "rtl": false,
+  "paths": {
+    "source": {
+      "config": "src/theme.config",
+      "definitions": "src/definitions/",
+      "site": "src/site/",
+      "themes": "src/themes/"
+    },
+    "output": {
+      "packaged": "../input/files/dist/",
+      "uncompressed": "../input/files/ui/components/",
+      "compressed": "../input/files/ui/components/",
+      "themes": "../input/files/ui/themes/"
+    },
+    "clean": "dist/"
+  },
+  "components": ["reset", "site", "header", "breadcrumb", "button", "card", "checkbox", "container", "divider", "icon", "image", "label", "list", "loader", "input", "segment", "form", "grid", "menu", "table", "accordion", "dimmer", "message", "modal", "dropdown", "popup", "embed", "transition", "reveal", "sidebar", "shape", "statistic", "tab", "api", "sticky", "transition", "visibility", "search", "step"]
+}

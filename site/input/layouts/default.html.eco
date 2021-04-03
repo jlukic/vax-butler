@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- @partial('google-analytics') %>
+  <%- @getBlock('meta').toHTML() %>
+
+  <%- @partial('meta') %>
+  <%- @partial('fonts') %>
+  <%- @getBlock('styles').toHTML() %>
+  <%- @partial('ui-css') %>
+  <%- @partial('css') %>
+</head>
+<body id="<%= @document.section %>" ontouchstart="">
+  <h1><%= @getH1() %></h1>
+  <page>
+    <%- @partial('header') %>
+    <%- @content %>
+    <%- @partial('footer') %>
+  </page>
+  <%- @partial('javascript') %>
+  <%- @getBlock('scripts').toHTML() %>
+</body>
+</html>

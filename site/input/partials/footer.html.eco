@@ -1,0 +1,9 @@
+---
+standalone : false
+---
+<footer class="<%= @type %>">
+  <div class="ui <%= if @type == 'inverted' then 'inverted' %> vertical footer segment">
+    <div class="ui container">
+    </div>
+  </div>
+</footer>

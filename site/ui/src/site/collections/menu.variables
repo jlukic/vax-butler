@@ -1,0 +1,9 @@
+@textMenuItemColor: rgba(0, 0, 0, 0.4);
+@invertedItemTextColor: rgba(255, 255, 255, 0.4);
+@textMenuItemFontWeight: bold;
+@textMenuActiveItemFontWeight: bold;
+
+@secondaryPointingItemVerticalPadding: 1.25em;
+@secondaryPointingActiveBorderColor: @green;
+@secondaryPointingActiveFontWeight: bold;
+

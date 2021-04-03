@@ -1,0 +1,6 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@borderColor: rgba(34, 36, 38, 0.08);
+@dividedInvertedBorder: -1px 0px 0px 0px rgba(255, 255, 255, 0.05);

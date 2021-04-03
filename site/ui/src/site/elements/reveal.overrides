@@ -1,0 +1,7 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.reveal > .content {
+  white-space: normal !important;
+}

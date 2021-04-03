@@ -1,0 +1,29 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+
+
+/* Tight */
+.ui.tight.three.cards {
+  margin: -1.5rem -1.5rem;
+}
+.ui.tight.three.cards > .card {
+  width: calc( 33.33333333% - 3rem );
+  margin: 1.5rem;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+  .ui.tight.three.doubling.cards > .card {
+    width: calc( 50% - 3rem );
+    margin: 1.5rem;
+  }
+
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.tight.three.cards > .card {
+    margin: 1em !important;
+  }
+}

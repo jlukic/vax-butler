@@ -1,0 +1,91 @@
+
+/*******************************
+        Font Declarations
+*******************************/
+
+/*--------------
+  Work Sans
+---------------*/
+
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 300;
+  src:
+    url(/fonts/worksans/WorkSans-Light.woff2) format('woff2'),
+    url(/fonts/worksans/WorkSans-Light.woff) format('woff')
+  ;
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 300;
+  src:
+    url(/fonts/worksans/WorkSans-LightItalic.woff2) format('woff2'),
+    url(/fonts/worksans/WorkSans-LightItalic.woff) format('woff')
+  ;
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url(/fonts/worksans/WorkSans-Regular.woff2) format('woff2'),
+    url(/fonts/worksans/WorkSans-Regular.woff) format('woff')
+  ;
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url(/fonts/worksans/WorkSans-Bold.woff2) format('woff2'),
+    url(/fonts/worksans/WorkSans-Bold.woff) format('woff')
+  ;
+}
+
+/*--------------
+      Open Sans
+---------------*/
+
+/* Regular */
+@font-face {
+  font-family: 'Open Sans';
+  src:
+    url(/fonts/opensans/OpenSans-Regular.woff2) format('woff2'),
+    url(/fonts/opensans/OpenSans-Regular.woff) format('woff')
+  ;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'Open Sans';
+  src:
+    url(/fonts/opensans/OpenSans-Italic.woff2) format('woff2'),
+    url(/fonts/opensans/OpenSans-Italic.woff) format('woff')
+  ;
+  font-style: italic;
+  font-weight: normal;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'Open Sans';
+  src:
+    url(/fonts/opensans/OpenSans-Medium.woff2) format('woff2'),
+    url(/fonts/opensans/OpenSans-Medium.woff) format('woff')
+  ;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'Open Sans';
+  src:
+    url(/fonts/opensans/OpenSans-Bold.woff2) format('woff2'),
+    url(/fonts/opensans/OpenSans-Bold.woff) format('woff')
+  ;
+  font-style: normal;
+  font-weight: 700;
+}

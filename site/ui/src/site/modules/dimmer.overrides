@@ -1,0 +1,7 @@
+/*******************************
+        User Overrides
+*******************************/
+
+.ui.dimmer .ui.loader:after {
+  border-color: #4daf7c #4daf7c #545454 #545454;
+}

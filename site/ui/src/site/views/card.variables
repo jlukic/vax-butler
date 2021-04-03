@@ -1,0 +1,16 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+@boxShadow:
+  0 15px 35px rgba(50, 50, 93, 0.1),
+  0 5px 15px rgba(0, 0, 0, .07)
+;
+@linkHoverBoxShadow:
+  0 15px 35px rgba(50, 50, 93, 0.1),
+  0 5px 15px rgba(0, 0, 0, 0.15)
+;
+@border: 1px solid #ECECEC;
+@contentPadding: 2.5em;
+
+@wideCardSpacing: 3.5rem;
+@rowSpacing: 6rem;

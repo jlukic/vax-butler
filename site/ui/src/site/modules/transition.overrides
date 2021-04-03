@@ -1,0 +1,150 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.transition.tilt.in {
+  animation-name: tiltIn;
+  transform-origin: top center;
+}
+@keyframes tiltIn {
+  0% {
+    opacity: 0;
+    transform: translateZ(-380px) rotateY(17deg) rotateZ(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0px) rotateY(0deg) rotateZ(0deg);
+  }
+}
+
+
+.transition.zoom.in {
+  animation-name: zoomIn;
+  transform-origin: bottom center;
+}
+@keyframes zoomIn {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.transition.zoom.float {
+  animation-name: zoomFloat;
+  transform-origin: bottom center;
+}
+@keyframes zoomFloat {
+  0% {
+    transform: translateY(0%);
+  }
+  65% {
+    transform: scale(0.9) translateY(7%);
+  }
+  100% {
+    transform: translateY(-0%);
+  }
+}
+
+.transition.float {
+  animation-name: float;
+  transform-origin: bottom center;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0%);
+  }
+  65% {
+    transform: scale(1) translateY(7%);
+  }
+  100% {
+    transform: translateY(-0%);
+  }
+}
+
+
+.transition.float {
+  animation-name: float;
+  transform-origin: bottom center;
+  animation-timing-function: ease-in-out;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0%);
+  }
+  65% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: translateY(-0%);
+  }
+}
+
+
+.transition.front.zzz.in {
+  animation-name: frontScale;
+  transform-origin: center center;
+}
+@keyframes frontScale {
+  0% {
+    transform: scale(0) translateZ(1px);
+    transform-style: preserve-3d;
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1) translateZ(1px);
+    opacity: 1;
+  }
+}
+
+.transition.back.zzz.in {
+  animation-name: backScale;
+  transform-origin: center center;
+}
+@keyframes backScale {
+  0% {
+    transform: scale(0) translateZ(0px);
+    transform-style: preserve-3d;
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1) translateZ(0px);
+    opacity: 1;
+  }
+}
+
+/* Rotated Screenshot Scale In */
+.transition.rotated.scale.in {
+  animation-name: rotatedScaleIn;
+  transform-origin: center center;
+}
+@keyframes rotatedScaleIn {
+  0% {
+    opacity: 0;
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(4deg) rotateY(-15deg) rotateZ(2deg) scale(1);
+  }
+}
+
+
+/* Rotated Screenshot Scale In */
+.transition.subtle.scale.in {
+  animation-name: subtleScaleIn;
+}
+@keyframes subtleScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

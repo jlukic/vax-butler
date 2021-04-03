@@ -1,0 +1,8 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@valueSize: 38px;
+@valueTextTransform: none;
+
+@green: #46B379;

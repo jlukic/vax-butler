@@ -1,0 +1,25 @@
+/*******************************
+        User Overrides
+*******************************/
+
+.ui.titled.titled.popup > .header {
+  background-color: #ffffff;
+  margin: -1px -1px 0px;
+  font-size: 1.14285714em;
+  padding: 10px 1em;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  color: #3a3a3a;
+  border-radius: 0.28571429rem 0.28571429rem 0px 0px;
+  text-align: center;
+  text-transforM: uppercase;
+  font-size: 13px;
+  position: relative;
+}
+.ui.titled.titled.popup > .content {
+  padding: 1em;
+  background: #F6F6F6 linear-gradient(transparent, rgba(0, 0, 0, 0.03));
+}
+.ui.titled.titled.popup:before {
+  background-color: #ffffff;
+}
+

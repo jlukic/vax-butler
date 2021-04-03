@@ -1,0 +1,12 @@
+/*******************************
+        Site Overrides
+*******************************/
+
+
+.ui.message p  {
+  font-size: 1.285em !important;
+}
+
+.ui.info.message {
+  border-radius: 0px @borderRadius @borderRadius 0px;
+}
