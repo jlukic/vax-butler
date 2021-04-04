@@ -11,7 +11,7 @@ Key Features
 * Select what vaccine you want 
 * Choose location by borough, max travel distance
 * Select times based off min/max hour of day
-* No server involved, book your own appiontment
+* Tool-assist booking, no remote server involved, book your own appointment directly from Chrome.
 
 Vaccine butler is a script designed to run ontop of NYC's Vaccine Finder website to automate appointment booking. It is intended to be used by non-technical users, and help anyone who is frustrated with being unable to find any open appointments. 
 
