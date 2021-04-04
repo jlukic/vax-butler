@@ -1,59 +1,191 @@
+(function() {
 
-function selectAppointment({ borough='any', maxMiles=999, minHour=0, maxHour=24} = {}) {
+  let
+    $ = function(query, context) {
+      if(context) {
+        return context.querySelectorAll(query);
+      }
+      let widget = document.querySelectorAll('.ui-widget');
+      if(widget) {
+        let lastWidget = widget[widget.length - 1];
+        return lastWidget.querySelectorAll(query);
+      }
+      return document.querySelectorAll(query);
+    },
+    // shorthand
+    selector,
+    settings
+  ;
 
-  // attach to mutation observer on .appointment-section
+  tpl = {
 
-  // each loop on blocks
-  let appointments = document.querySelectorAll('.appointment_card');
-  for (let appointment of appointments) {
-    console.log(appointment);
-    let
-      isMatch     = true,
-      milesEl     = appointment.querySelectorAll('.slds-m-bottom_none')[0],
-      addressEl   = milesEl.parentNode,
-      address     = addressEl.innerText.split('|')[0].trim(),
-      milesString = milesEl.innerHTML.replace(/(\||[a-z]|\s)+/mg,''),
-      miles       = parseFloat(milesString, 10),
-      borough
-    ;
-  }
+    reloadTime: 100,
 
-    console.log(address, miles);
+    defaults: {
+      borough  : 'any',
+      maxMiles : 999,
+      minHour  : 0,
+      maxHour  : 24
+    },
 
-  // check if matches mile constraint
+    selector: {
+      searchInput : 'input[name="zipCodeValue',
+      appointment : '.appointment_card',
+      patientInfo : 'c-vcms-patient-information-section-a',
+      miles       : '.slds-m-bottom_none',
+      time        : '.lightning-formatted-time',
+      name        : '.page-h3'
+    },
 
-  // check if matches borough constraint
+    settings: {},
 
-  // get each time choice
+    initialize() {
+      tpl.set.userSettings();
+      tpl.set.shorthand();
 
-  // iterate over each time
+      tpl.bind.documentObserver();
+      tpl.start.searchLoop();
+    },
 
-  // push ones that match time constraints to matching time list
+    start: {
+      searchLoop() {
+        tpl.searchLoop = setInterval(tpl.set.zipcodeQuery, tpl.reloadTime);
+      }
+    },
 
-  // store first matching el
+    bind: {
+      documentObserver() {
+        // add mutation observer for determining when appointment is found
+        let selectObserver = new MutationObserver(tpl.event.documentChanged);
+        documentObserver.observe(document, {
+          childList : true,
+          subtree   : true
+        });
+      }
+    },
 
-  // store info to obj with isMatch
+    set: {
+      shortHand() {
+        settings = tpl.settings;
+        selector = tpl.selector;
+      },
+      userSettings(userSettings) {
+        settings = Object.assign(defaults, userSettings);
+      },
+      zipcodeQuery() {
+        $(selector.searchInput).value = null;
+        $(selector.searchInput).value = settings.zipcode;
+      },
+      appointmentList() {
+        // each loop on blocks
+        let appointments = $(appointment);
+        for (let appointment of appointments) {
+          console.log(appointment);
+          let
+            isMatch       = true,
+            nameEl        = $(selector.name, appointment)[0],
+            milesEl       = $(selector.miles, appointment)[0],
+            timeEls       = $(selector.time, appointment),
+            addressEl     = milesEl.parentNode,
 
-  // filter list by match
+            name          = nameEl.innerText,
+            address       = addressEl.innerText.split('|')[0].trim(),
+            milesString   = milesEl.innerHTML.replace(/(\||[a-z]|\s)+/mg, ''),
+            miles         = parseFloat(milesString, 10),
+            times         = [],
+            matchingTimes = [],
+            appointmentData,
+            borough
+          ;
 
-  // click first
+          for (let timeEl of timeEls) {
+            let
+              timeText  = timeEl.innerText,
+              timeParts = timeText.split(' '),
+              hourParts = timeParts[0].split(':'),
+              time      = {
+                hours   : Number(hourParts[0]),
+                minutes : Number(hourParts[1]),
+                element : timeEl,
+              }
+            ;
+            if(timeParts[1] == 'PM') {
+              time.hours += 12;
+            }
+            if(hour > settings.minHour && hour < settings.maxHour) {
+              matchingTimes.push(time);
+            }
+            times.push(time);
+          }
+          appointmentData = {
+            name          : name,
+            miles         : miles,
+            address       : address,
+            times         : times,
+            matchingTimes : matchingTimes,
+          };
+          appointments.push(appointmentData);
+        }
+      },
+    },
 
-  // detect page change
-
-  // show confetti overlay with the time and place
-}
-
-function loop() {
-
-}
-
-function refreshResults() {
-
-}
+    select: {
+      appointment() {
 
 
-// function refreshAppointments
+
+        console.log(address, miles);
+
+        // check if matches mile constraint
+
+        // check if matches borough constraint
+
+        // get each time choice
+
+        // iterate over each time
+
+        // push ones that match time constraints to matching time list
+
+        // store first matching el
+
+        // store info to obj with isMatch
+
+        // filter list by match
+
+        // click first
 
 
-// function doLoop
+      }
+    },
 
+    show: {
+      settingsModal() {
+
+      },
+      successModal() {
+        // show confetti overlay with the time and place
+
+      }
+    },
+
+    event: {
+      documentChanged() {
+
+        // check if new page content is in the DOM
+        if($(selector.appointment).length > 0) {
+          tpl.set.appointmentList();
+          return;
+        }
+
+        if($(selector.patientInfo).length > 0) {
+          showSuccessModal();
+        }
+      }
+    },
+
+
+  }.initialize();
+
+
+
+})();
