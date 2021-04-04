@@ -1,5 +1,16 @@
 <topBar class="<%= @type %>">
   <div class="ui container">
-
+    <div class="ui right floated mini primary button">
+      Book Appointment
+    </div>
+    <div class="ui text menu">
+      <div class="item">
+        <img src="/images/logo-header.png" class="ui logo image">
+      </div>
+      <a class="item" href="/">Home</a>
+      <a class="item" href="/expert">Experts</a>
+      <a class="item" href="/faq">FAQ</a>
+      <a class="item" href="/about">About</a>
+    </div>
   </div>
 </topBar>

@@ -6,24 +6,23 @@
      Global
 ---------------*/
 
-/* Size down */
-@emSize      : 13px;
-@fontSize    : 13px;
+@emSize      : 14px;
+@fontSize    : 14px;
 
-@miniSize    : (10 / 13);
-@tinySize    : (11 / 13);
-@smallSize   : (12 / 13);
-@mediumSize  : (13 / 13);
-@largeSize   : (15 / 13);
-@bigSize     : (16 / 13);
-@hugeSize    : (18 / 13);
-@massiveSize : (22 / 13);
+@miniSize    : (10 / 14);
+@tinySize    : (11 / 14);
+@smallSize   : (12 / 14);
+@mediumSize  : (14 / 14);
+@largeSize   : (15 / 14);
+@bigSize     : (16 / 14);
+@hugeSize    : (18 / 14);
+@massiveSize : (22 / 14);
 
-@h1          : unit(28/13, em);
-@h2          : unit(20/13, em);
-@h3          : unit(16/13, em);
-@h4          : unit(15/13, em);
-@h5          : unit(14/13, em);
+@h1          : unit(28/14, em);
+@h2          : unit(20/14, em);
+@h3          : unit(16/14, em);
+@h4          : unit(15/14, em);
+@h5          : unit(14/14, em);
 
 @inputVerticalPadding     : @relative10px;
 @inputHorizontalPadding   : @relative12px;

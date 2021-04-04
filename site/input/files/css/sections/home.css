@@ -1,6 +1,6 @@
 #home aboveFold {
   position: relative;
-  height: 450px;
+  height: 425px;
   padding: 7rem 0rem;
 }
 #home aboveFold img {
@@ -8,18 +8,6 @@
   right: 0rem;
   top: -130px;
   height: 600px;
-}
-#home aboveFold bg {
-  z-index: 1;
-  position: absolute;
-  transform-origin: 50% 50%;
-  top: -150%;
-  right: -50%;
-  width: 200%;
-  height: 250%;
-  border-radius: 100%;
-  pointer-events: none;
-  background-image: linear-gradient(180deg, #FFFFFF, #FFC9CA);
 }
 #home aboveFold .ui.container {
   position: relative;

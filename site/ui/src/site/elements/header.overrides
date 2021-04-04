@@ -9,8 +9,8 @@ h1.ui.header {
 h2,
 h2.ui.header {
   font-family: @pageHeaderFont !important;
-  font-weight: normal;
-  font-size: 24px;
+  font-weight: bold;
+  font-size: 48px;
 }
 h1 .sub.header,
 h1.ui.header .sub.header,
@@ -26,7 +26,7 @@ h3,
 h3.ui.header {
   font-family: @pageFont !important;
   letter-spacing: 1px;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -40,8 +40,3 @@ h3.ui.header {
   display: inline-flex;
 }
 
-
-.ui.header:not(.icon) > .inverted.yellow.circular.icon {
-  background-color: #ecd087 !important;
-  color: #ffffff !important;
-}

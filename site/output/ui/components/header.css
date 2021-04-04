@@ -20,7 +20,7 @@
   margin: calc(2rem -  0.14285714em ) 0em 1rem;
   padding: 0em 0em;
   font-family: 'Fira Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.28571429em;
   text-transform: none;
   color: rgba(0, 0, 0, 0.87);
@@ -131,27 +131,27 @@
 ---------------*/
 
 h1.ui.header {
-  font-size: 2.15384615em;
+  font-size: 2em;
 }
 h2.ui.header {
-  font-size: 1.53846154em;
+  font-size: 1.42857143em;
 }
 h3.ui.header {
-  font-size: 1.23076923em;
+  font-size: 1.14285714em;
 }
 h4.ui.header {
-  font-size: 1.15384615em;
+  font-size: 1.07142857em;
 }
 h5.ui.header {
-  font-size: 1.07692308em;
+  font-size: 1em;
 }
 
 /* Sub Header */
 h1.ui.header .sub.header {
-  font-size: 1.15384615rem;
+  font-size: 1.07142857rem;
 }
 h2.ui.header .sub.header {
-  font-size: 1.15384615rem;
+  font-size: 1.07142857rem;
 }
 h3.ui.header .sub.header {
   font-size: 1rem;
@@ -160,7 +160,7 @@ h4.ui.header .sub.header {
   font-size: 1rem;
 }
 h5.ui.header .sub.header {
-  font-size: 0.92307692rem;
+  font-size: 0.85714286rem;
 }
 
 /*--------------
@@ -169,27 +169,27 @@ h5.ui.header .sub.header {
 
 .ui.huge.header {
   min-height: 1em;
-  font-size: 2.15384615em;
+  font-size: 2em;
 }
 .ui.large.header {
-  font-size: 1.53846154em;
+  font-size: 1.42857143em;
 }
 .ui.medium.header {
-  font-size: 1.23076923em;
+  font-size: 1.14285714em;
 }
 .ui.small.header {
-  font-size: 1.15384615em;
+  font-size: 1.07142857em;
 }
 .ui.tiny.header {
-  font-size: 1.07692308em;
+  font-size: 1em;
 }
 
 /* Sub Header */
 .ui.huge.header .sub.header {
-  font-size: 1.15384615rem;
+  font-size: 1.07142857rem;
 }
 .ui.large.header .sub.header {
-  font-size: 1.15384615rem;
+  font-size: 1.07142857rem;
 }
 .ui.header .sub.header {
   font-size: 1rem;
@@ -198,7 +198,7 @@ h5.ui.header .sub.header {
   font-size: 1rem;
 }
 .ui.tiny.header .sub.header {
-  font-size: 0.92307692rem;
+  font-size: 0.85714286rem;
 }
 
 /*--------------
@@ -207,20 +207,20 @@ h5.ui.header .sub.header {
 
 .ui.sub.header {
   padding: 0em;
-  margin-bottom: 0.15384615rem;
+  margin-bottom: 0.14285714rem;
   font-weight: bold;
-  font-size: 0.84615385em;
+  font-size: 0.78571429em;
   text-transform: uppercase;
   color: '';
 }
 .ui.small.sub.header {
-  font-size: 0.76923077em;
+  font-size: 0.71428571em;
 }
 .ui.sub.header {
-  font-size: 0.84615385em;
+  font-size: 0.78571429em;
 }
 .ui.large.sub.header {
-  font-size: 0.92307692em;
+  font-size: 0.85714286em;
 }
 .ui.huge.sub.header {
   font-size: 1em;
@@ -616,11 +616,11 @@ a.ui.inverted.grey.header:hover {
 --------------------*/
 
 .ui.dividing.header {
-  padding-bottom: 0.23076923rem;
+  padding-bottom: 0.21428571rem;
   border-bottom: 1px solid rgba(34, 36, 38, 0.15);
 }
 .ui.dividing.header .sub.header {
-  padding-bottom: 0.23076923rem;
+  padding-bottom: 0.21428571rem;
 }
 .ui.dividing.header .icon {
   margin-bottom: 0em;
@@ -635,26 +635,26 @@ a.ui.inverted.grey.header:hover {
 
 .ui.block.header {
   background: #F3F4F5;
-  padding: 0.76923077rem 1rem;
+  padding: 0.71428571rem 1rem;
   -webkit-box-shadow: none;
           box-shadow: none;
   border: 1px solid #D4D4D5;
-  border-radius: 0.30769231rem;
+  border-radius: 0.28571429rem;
 }
 .ui.tiny.block.header {
-  font-size: 0.84615385rem;
+  font-size: 0.78571429rem;
 }
 .ui.small.block.header {
-  font-size: 0.92307692rem;
+  font-size: 0.85714286rem;
 }
 .ui.block.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
   font-size: 1rem;
 }
 .ui.large.block.header {
-  font-size: 1.15384615rem;
+  font-size: 1.07142857rem;
 }
 .ui.huge.block.header {
-  font-size: 1.38461538rem;
+  font-size: 1.28571429rem;
 }
 
 /*-------------------
@@ -663,7 +663,7 @@ a.ui.inverted.grey.header:hover {
 
 .ui.attached.header {
   background: #FFFFFF;
-  padding: 0.76923077rem 1rem;
+  padding: 0.71428571rem 1rem;
   margin-left: -1px;
   margin-right: -1px;
   -webkit-box-shadow: none;
@@ -681,29 +681,29 @@ a.ui.inverted.grey.header:hover {
 }
 .ui.top.attached.header {
   margin-bottom: 0em;
-  border-radius: 0.30769231rem 0.30769231rem 0em 0em;
+  border-radius: 0.28571429rem 0.28571429rem 0em 0em;
 }
 .ui.bottom.attached.header {
   margin-top: 0em;
   border-top: none;
-  border-radius: 0em 0em 0.30769231rem 0.30769231rem;
+  border-radius: 0em 0em 0.28571429rem 0.28571429rem;
 }
 
 /* Attached Sizes */
 .ui.tiny.attached.header {
-  font-size: 0.84615385em;
+  font-size: 0.78571429em;
 }
 .ui.small.attached.header {
-  font-size: 0.92307692em;
+  font-size: 0.85714286em;
 }
 .ui.attached.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
   font-size: 1em;
 }
 .ui.large.attached.header {
-  font-size: 1.15384615em;
+  font-size: 1.07142857em;
 }
 .ui.huge.attached.header {
-  font-size: 1.38461538em;
+  font-size: 1.28571429em;
 }
 
 /*-------------------
@@ -711,7 +711,7 @@ a.ui.inverted.grey.header:hover {
 --------------------*/
 
 .ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
-  font-size: 1.23076923em;
+  font-size: 1.14285714em;
 }
 
 
@@ -730,8 +730,8 @@ h1.ui.header {
 h2,
 h2.ui.header {
   font-family: 'Cormorant Garamond', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
-  font-weight: normal;
-  font-size: 24px;
+  font-weight: bold;
+  font-size: 48px;
 }
 h1 .sub.header,
 h1.ui.header .sub.header,
@@ -747,7 +747,7 @@ h3,
 h3.ui.header {
   font-family: 'Fira Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
   letter-spacing: 1px;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -764,8 +764,4 @@ h3.ui.header {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-}
-.ui.header:not(.icon) > .inverted.yellow.circular.icon {
-  background-color: #ecd087 !important;
-  color: #ffffff !important;
 }

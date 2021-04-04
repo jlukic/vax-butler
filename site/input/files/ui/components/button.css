@@ -34,7 +34,7 @@
   font-style: normal;
   text-align: center;
   text-decoration: none;
-  border-radius: 0.30769231rem;
+  border-radius: 0.28571429rem;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   -webkit-user-select: none;
@@ -142,9 +142,9 @@
   content: '';
   top: 50%;
   left: 50%;
-  margin: -0.61538462em 0em 0em -0.61538462em;
-  width: 1.23076923em;
-  height: 1.23076923em;
+  margin: -0.57142857em 0em 0em -0.57142857em;
+  width: 1.14285714em;
+  height: 1.14285714em;
   border-radius: 500rem;
   border: 0.2em solid rgba(0, 0, 0, 0.15);
 }
@@ -153,9 +153,9 @@
   content: '';
   top: 50%;
   left: 50%;
-  margin: -0.61538462em 0em 0em -0.61538462em;
-  width: 1.23076923em;
-  height: 1.23076923em;
+  margin: -0.57142857em 0em 0em -0.57142857em;
+  width: 1.14285714em;
+  height: 1.14285714em;
   -webkit-animation: button-spin 2s linear;
           animation: button-spin 2s linear;
   -webkit-animation-iteration-count: infinite;
@@ -637,19 +637,19 @@
 ---------------*/
 
 .ui.button > .icon:not(.button) {
-  height: 0.84615385em;
+  height: 0.78571429em;
   opacity: 0.8;
-  margin: 0em 0.46153846em 0em -0.23076923em;
+  margin: 0em 0.42857143em 0em -0.21428571em;
   -webkit-transition: opacity 0.1s ease;
   transition: opacity 0.1s ease;
   vertical-align: '';
   color: '';
 }
 .ui.button:not(.icon) > .icon:not(.button):not(.dropdown) {
-  margin: 0em 0.46153846em 0em -0.23076923em;
+  margin: 0em 0.42857143em 0em -0.21428571em;
 }
 .ui.button:not(.icon) > .right.icon:not(.button):not(.dropdown) {
-  margin: 0em -0.23076923em 0em 0.46153846em;
+  margin: 0em -0.21428571em 0em 0.42857143em;
 }
 
 
@@ -699,42 +699,42 @@
 .ui.mini.buttons .button,
 .ui.mini.buttons .or,
 .ui.mini.button {
-  font-size: 0.76923077rem;
+  font-size: 0.71428571rem;
 }
 .ui.tiny.buttons .button,
 .ui.tiny.buttons .or,
 .ui.tiny.button {
-  font-size: 0.84615385rem;
+  font-size: 0.78571429rem;
 }
 .ui.small.buttons .button,
 .ui.small.buttons .or,
 .ui.small.button {
-  font-size: 0.92307692rem;
+  font-size: 0.85714286rem;
 }
 .ui.buttons .button,
 .ui.buttons .or,
 .ui.button {
-  font-size: 1rem;
+  font-size: 0.92857143rem;
 }
 .ui.large.buttons .button,
 .ui.large.buttons .or,
 .ui.large.button {
-  font-size: 1.07692308rem;
+  font-size: 1rem;
 }
 .ui.big.buttons .button,
 .ui.big.buttons .or,
 .ui.big.button {
-  font-size: 1.15384615rem;
+  font-size: 1.07142857rem;
 }
 .ui.huge.buttons .button,
 .ui.huge.buttons .or,
 .ui.huge.button {
-  font-size: 1.23076923rem;
+  font-size: 1.14285714rem;
 }
 .ui.massive.buttons .button,
 .ui.massive.buttons .or,
 .ui.massive.button {
-  font-size: 1.69230769rem;
+  font-size: 1.57142857rem;
 }
 
 /*--------------
@@ -761,7 +761,7 @@
   background: transparent none !important;
   color: #333333 !important;
   font-weight: normal;
-  border-radius: 0.30769231rem;
+  border-radius: 0.28571429rem;
   text-transform: none;
   text-shadow: none !important;
   -webkit-box-shadow: 0px 0px 0px 1px rgba(34, 36, 38, 0.15) inset;
@@ -771,7 +771,7 @@
   -webkit-box-shadow: none;
           box-shadow: none;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  border-radius: 0.30769231rem;
+  border-radius: 0.28571429rem;
 }
 .ui.basic.buttons .button {
   border-radius: 0em;
@@ -948,20 +948,20 @@
   border-radius: 0em;
 }
 .ui.labeled.icon.buttons .button:first-child > .icon {
-  border-top-left-radius: 0.30769231rem;
-  border-bottom-left-radius: 0.30769231rem;
+  border-top-left-radius: 0.28571429rem;
+  border-bottom-left-radius: 0.28571429rem;
 }
 .ui.labeled.icon.buttons .button:last-child > .icon {
-  border-top-right-radius: 0.30769231rem;
-  border-bottom-right-radius: 0.30769231rem;
+  border-top-right-radius: 0.28571429rem;
+  border-bottom-right-radius: 0.28571429rem;
 }
 .ui.vertical.labeled.icon.buttons .button:first-child > .icon {
   border-radius: 0em;
-  border-top-left-radius: 0.30769231rem;
+  border-top-left-radius: 0.28571429rem;
 }
 .ui.vertical.labeled.icon.buttons .button:last-child > .icon {
   border-radius: 0em;
-  border-bottom-left-radius: 0.30769231rem;
+  border-bottom-left-radius: 0.28571429rem;
 }
 
 /* Fluid Labeled */
@@ -1063,10 +1063,10 @@
 
 /* Top / Bottom */
 .ui.attached.top.button {
-  border-radius: 0.30769231rem 0.30769231rem 0em 0em;
+  border-radius: 0.28571429rem 0.28571429rem 0em 0em;
 }
 .ui.attached.bottom.button {
-  border-radius: 0em 0em 0.30769231rem 0.30769231rem;
+  border-radius: 0em 0em 0.28571429rem 0.28571429rem;
 }
 
 /* Left / Right */
@@ -1075,13 +1075,13 @@
   border-left: none;
   text-align: right;
   padding-right: 0.75em;
-  border-radius: 0.30769231rem 0em 0em 0.30769231rem;
+  border-radius: 0.28571429rem 0em 0em 0.28571429rem;
 }
 .ui.right.attached.button {
   display: inline-block;
   text-align: left;
   padding-left: 0.75em;
-  border-radius: 0em 0.30769231rem 0.30769231rem 0em;
+  border-radius: 0em 0.28571429rem 0.28571429rem 0em;
 }
 
 /* Plural */
@@ -1109,23 +1109,23 @@
 /* Top / Bottom */
 .ui[class*="top attached"].buttons {
   margin-bottom: -1px;
-  border-radius: 0.30769231rem 0.30769231rem 0em 0em;
+  border-radius: 0.28571429rem 0.28571429rem 0em 0em;
 }
 .ui[class*="top attached"].buttons .button:first-child {
-  border-radius: 0.30769231rem 0em 0em 0em;
+  border-radius: 0.28571429rem 0em 0em 0em;
 }
 .ui[class*="top attached"].buttons .button:last-child {
-  border-radius: 0em 0.30769231rem 0em 0em;
+  border-radius: 0em 0.28571429rem 0em 0em;
 }
 .ui[class*="bottom attached"].buttons {
   margin-top: -1px;
-  border-radius: 0em 0em 0.30769231rem 0.30769231rem;
+  border-radius: 0em 0em 0.28571429rem 0.28571429rem;
 }
 .ui[class*="bottom attached"].buttons .button:first-child {
-  border-radius: 0em 0em 0em 0.30769231rem;
+  border-radius: 0em 0em 0em 0.28571429rem;
 }
 .ui[class*="bottom attached"].buttons .button:last-child {
-  border-radius: 0em 0em 0.30769231rem 0em;
+  border-radius: 0em 0em 0.28571429rem 0em;
 }
 
 /* Left / Right */
@@ -1135,15 +1135,15 @@
   display: inline-flex;
   margin-right: 0em;
   margin-left: -1px;
-  border-radius: 0em 0.30769231rem 0.30769231rem 0em;
+  border-radius: 0em 0.28571429rem 0.28571429rem 0em;
 }
 .ui[class*="left attached"].buttons .button:first-child {
   margin-left: -1px;
-  border-radius: 0em 0.30769231rem 0em 0em;
+  border-radius: 0em 0.28571429rem 0em 0em;
 }
 .ui[class*="left attached"].buttons .button:last-child {
   margin-left: -1px;
-  border-radius: 0em 0em 0.30769231rem 0em;
+  border-radius: 0em 0em 0.28571429rem 0em;
 }
 .ui[class*="right attached"].buttons {
   display: -webkit-inline-box;
@@ -1151,15 +1151,15 @@
   display: inline-flex;
   margin-left: 0em;
   margin-right: -1px;
-  border-radius: 0.30769231rem 0em 0em 0.30769231rem;
+  border-radius: 0.28571429rem 0em 0em 0.28571429rem;
 }
 .ui[class*="right attached"].buttons .button:first-child {
   margin-left: -1px;
-  border-radius: 0.30769231rem 0em 0em 0em;
+  border-radius: 0.28571429rem 0em 0em 0em;
 }
 .ui[class*="right attached"].buttons .button:last-child {
   margin-left: -1px;
-  border-radius: 0em 0em 0em 0.30769231rem;
+  border-radius: 0em 0em 0em 0.28571429rem;
 }
 
 /*-------------------
@@ -3837,12 +3837,12 @@
 .ui.buttons .button:first-child {
   border-left: none;
   margin-left: 0em;
-  border-top-left-radius: 0.30769231rem;
-  border-bottom-left-radius: 0.30769231rem;
+  border-top-left-radius: 0.28571429rem;
+  border-bottom-left-radius: 0.28571429rem;
 }
 .ui.buttons .button:last-child {
-  border-top-right-radius: 0.30769231rem;
-  border-bottom-right-radius: 0.30769231rem;
+  border-top-right-radius: 0.28571429rem;
+  border-bottom-right-radius: 0.28571429rem;
 }
 
 /* Vertical  Style */
@@ -3865,16 +3865,16 @@
   border-radius: 0em;
 }
 .ui.vertical.buttons .button:first-child {
-  border-top-left-radius: 0.30769231rem;
-  border-top-right-radius: 0.30769231rem;
+  border-top-left-radius: 0.28571429rem;
+  border-top-right-radius: 0.28571429rem;
 }
 .ui.vertical.buttons .button:last-child {
   margin-bottom: 0px;
-  border-bottom-left-radius: 0.30769231rem;
-  border-bottom-right-radius: 0.30769231rem;
+  border-bottom-left-radius: 0.28571429rem;
+  border-bottom-right-radius: 0.28571429rem;
 }
 .ui.vertical.buttons .button:only-child {
-  border-radius: 0.30769231rem;
+  border-radius: 0.28571429rem;
 }
 
 
