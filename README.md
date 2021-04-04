@@ -1,4 +1,4 @@
-# vax-butler
+# Vaccine Butler
 Self-use Automated Appointment NYC Vaccination Booker
 
 [vaccinebutler.com](https://www.vaccinebutler.com)
