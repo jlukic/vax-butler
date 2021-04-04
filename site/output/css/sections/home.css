@@ -1,29 +1,4 @@
-#home aboveFold {
-  position: relative;
-  height: 425px;
-  padding: 7rem 0rem;
-}
-#home aboveFold img {
-  position: absolute;
-  right: 0rem;
-  top: -130px;
-  height: 600px;
-}
-#home aboveFold .ui.container {
-  position: relative;
-  z-index: 2;
-}
 
-#home aboveFold copy {
-  position: relative;
-  z-index: 2;
-  max-width: 500px;
-}
-#home aboveFold .header {
-  color: rgba(0, 0, 0, 0.9);
-  font-size: 48px;
-}
-#home aboveFold p {
-  font-size: 19px;
-  color: rgba(0, 0, 0, 0.7);
+#home .ui.card p {
+  font-size: 17px;
 }

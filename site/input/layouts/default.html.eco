@@ -15,8 +15,10 @@
 <body id="<%= @document.section %>" ontouchstart="">
   <h1><%= @getH1() %></h1>
   <page>
-    <%- @partial('header') %>
-    <%- @content %>
+    <%- @partial('header', { section: @document.section }) %>
+    <content>
+      <%- @content %>
+    </content>
     <%- @partial('footer') %>
   </page>
   <%- @partial('javascript') %>

@@ -62,6 +62,9 @@ docpadConfig = {
     getVersion: ->
       @site.version
 
+    isActive: (word, secondWord) =>
+      'active' if word == secondWord
+
     tokenize: (name) =>
       slug = String(name).toLowerCase()
         .replace(/\s+/g, '-')

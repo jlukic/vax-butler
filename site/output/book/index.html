@@ -112,54 +112,74 @@
   <page>
     <topBar class="">
   <div class="ui container">
-    <div class="ui right floated mini primary button">
+    <a class="ui right floated mini primary button" href="/book">
       Book Appointment
-    </div>
+    </a>
     <div class="ui text menu">
       <div class="item">
-        <img src="/images/logo-header.png" class="ui logo image">
+        <a href="/">
+          <img src="/images/logo-header.png" class="ui logo image">
+        </a>
       </div>
-      <a class="item" href="/">Home</a>
-      <a class="item" href="/expert">Experts</a>
-      <a class="item" href="/faq">FAQ</a>
-      <a class="item" href="/about">About</a>
+      <a class="active item" href="/book">Book</a>
+      <a class=" item" href="/faq">FAQ</a>
+      <a class=" item" href="/about">About</a>
     </div>
   </div>
 </topBar>
 
-    <aboveFold>
+    <content>
+      <aboveFold>
   <bg></bg>
+  <div class="ui container">
+    <img src="/images/hero2.png" class="hero">
+    <copy>
+      <h2 class="ui header">
+        Appointment Booking
+      </h2>
+      <p>
+        Vaccine butler is a code snippet that you can run to help automate your vaccine booking experience.
+      </p>
+      <p>Simply follow the steps below to save time and ensure you get exactly the appointment you want appointment.</p>
+    </copy>
+  </div>
+</aboveFold>
+
+<belowFold>
   <div class="ui container">
     <div class="ui cards">
       <div class="ui fluid card">
         <div class="content">
-          <h2 class="ui header">
+          <h3 class="ui header">
             <span class="count">
               <span class="number">1</span>)
             </span>
             <span class="name">
               Fill In Personal Information
             </span>
-          </h2>
+          </h3>
           <p class="description">
             Visit the official
-            <a href="https://vax4nyc.nyc.gov/patient/s/vaccination-schedule" target="_blank">
+            <a href="https://vax4nyc.nyc.gov" target="_blank">
               NYC Vaccination Finder
             </a>
             site and follow the instructions to confirm eligibility and health screening.
           </p>
+          <div class="ui secondary button" href="https://vax4nyc.nyc.gov/patient/s/vaccination-schedule" target="_blank">
+            Start Vaccine Registration
+          </div>
         </div>
       </div>
       <div class="ui fluid card">
         <div class="content">
-          <h2 class="ui header">
+          <h3 class="ui header">
             <span class="count">
               <span class="number">2</span>)
             </span>
             <span class="name">
               Copy the code snippet below
             </span>
-          </h2>
+          </h3>
           <p class="description">
             Copy the code snippet below, that will inject code to automate reloading the page and finding an appointment that matches your requirements.
           </p>
@@ -167,14 +187,14 @@
       </div>
       <div class="ui fluid card">
         <div class="content">
-          <h2 class="ui header">
+          <h3 class="ui header">
             <span class="count">
               <span class="number">3</span>)
             </span>
             <span class="name">
               Let the script run and walk away.
             </span>
-          </h2>
+          </h3>
           <p class="description">
             Minimizing the window or making it inactive will prevent the script from continuing to search.
           </p>
@@ -182,7 +202,8 @@
       </div>
     </div>
   </div>
-</aboveFold>
+</belowFold>
+    </content>
     <footer class="">
   <div class="ui  vertical footer segment">
     <div class="ui container">

@@ -78,6 +78,35 @@ aboveFold copy .header {
 aboveFold copy p {
   font-size: 21px !important;
 }
+aboveFold {
+  position: relative;
+  height: 450px;
+  padding: 8rem 0rem;
+}
+aboveFold img.hero {
+  position: absolute;
+  right: 0rem;
+  top: 0px;
+  height: 400px;
+}
+aboveFold .ui.container {
+  position: relative;
+  z-index: 2;
+}
+
+aboveFold copy {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+}
+aboveFold .header {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 48px;
+}
+aboveFold p {
+  font-size: 19px;
+  color: rgba(0, 0, 0, 0.7);
+}
 
 /*--------------
     Top Bar
