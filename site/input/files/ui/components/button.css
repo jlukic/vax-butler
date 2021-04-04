@@ -760,7 +760,7 @@
 .ui.basic.button {
   background: transparent none !important;
   color: #333333 !important;
-  font-weight: normal;
+  font-weight: bold;
   border-radius: 0.28571429rem;
   text-transform: none;
   text-shadow: none !important;

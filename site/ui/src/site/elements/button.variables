@@ -18,3 +18,4 @@
 @big: @15px;
 @huge: @16px;
 
+@basicFontWeight: bold;
