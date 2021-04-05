@@ -12,10 +12,10 @@
           <img src="/images/logo-header.png" class="ui logo image">
         </a>
       </div>
-      <a class="<%= @isActive(@section, 'setup') %> item" href="/setup">Get Started</a>
+      <a class="<%= @isActive(@section, 'setup') %> item" href="/setup/">Get Started</a>
       <!--  Not Yet
-      <a class="<%= @isActive(@section, 'faq') %> item" href="/faq">FAQ</a>
-      <a class="<%= @isActive(@section, 'about') %> item" href="/about">About</a>
+      <a class="<%= @isActive(@section, 'faq') %> item" href="/faq/">FAQ</a>
+      <a class="<%= @isActive(@section, 'about') %> item" href="/about/">About</a>
     -->
     </div>
   </div>
