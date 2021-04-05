@@ -3,7 +3,7 @@ Self-use Automated Appointment NYC Vaccination Booker
 
 [vaccinebutler.com](https://www.vaccinebutler.com)
 
-> Note: This code is not currently ready for use. I'm aiming to finalize before April 4 in anticipation of the 16+ vaccine availability.
+> Note: There may be multiple rapid updates to this tool in the next few days. Be sure to update your bookmarklet regularly to have the latest up to date code.
 
 # Vaccine Butler
 
@@ -17,12 +17,8 @@ Vaccine butler is a script designed to run ontop of NYC's Vaccine Finder website
 
 ## How To Use
 
-1) Goto Vaccine finder and complete the form until the page where it shows available appointments
-2) Open dev tools and paste the code snippet into chrome console, or using the Snippets panel
-3) Fill in the modal to specify your booking parameters
-4) Leave the tab open (and active!) and wait for your appointment to book
-5) When your appointment is ready you'll hear an audio cue and can come back to your computer to finalize the details.
+1) Follow setup guide [https://www.vaccinebutler.com](https://www.vaccinebutler.com/setup) to add bookmarklet
+2) Run bookmarklet from NYC Vaccine Registration page *after completing vaccine registration* on screen with available appointments.
 
 ## User Support
-
-We will be adding a chat to help people with running the script after launch.
+We will be adding chat support shortly to help provide help using the tool.
