@@ -127,6 +127,9 @@ topBar {
 topbar .logo.image {
   height: 30px;
 }
+topbar .github {
+  float: right;
+}
 
 
 /*--------------
