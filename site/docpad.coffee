@@ -22,7 +22,7 @@ docpadConfig = {
       url: "https://www.vaxbutler.nyc"
 
       # Update this flag whenever css/js should be reloaded
-      version: "0.0.1",
+      version: "1.0.0",
 
       # The default title of our website
       title: "Welcome | Vaccine Butler"
