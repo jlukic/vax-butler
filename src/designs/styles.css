@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:700i|Fira+Sans');
+
+/*
+  UI
+*/
+
+contentInject {
+  font-family: 'Fira Sans';
+}
+contentInject .header {
+  font-family: 'Cormorant Garamond';
+}
+contentInject .dimmer {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 10;
+  transition: 0.5s ease opacity;
+}
+contentInject .dimmer .confetti {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+contentInject .dimmer.visible {
+  pointer-events: auto;
+  opacity: 1;
+}
+contentInject .button {
+  cursor: pointer;
+  margin: 0px 7px 0px 0px;
+  background-color: #000000;
+  transition: 0.2s all ease;
+  padding: 12px 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+contentInject .button {
+  background-color: #EEEEEE;
+  color: #555555;
+}
+contentInject .button:hover {
+  background-color: #DDDDDD;
+}
+contentInject .primary.button {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+contentInject .primary.button:hover {
+  background-color: #EC5E5E;
+}
+contentInject .modal {
+  display: none;
+  flex-direction: column;
+  position: relative;
+  background-color: #FFFFFF;
+  box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  overflow: hidden;
+  width: 800px;
+  min-height: 500px;
+  z-index: 11;
+  opacity: 0;
+  transition: 0.5s ease opacity;
+}
+contentInject .modal.visible {
+  display: flex;
+  opacity: 1;
+}
+contentInject .modal > .header {
+  font-size: 36px;
+  font-weight: bold;
+  padding: 2rem 2rem;
+  flex: 0 1 auto;
+  border-bottom: 1px solid #DADADA;
+}
+contentInject .modal .content {
+  padding: 1rem 2rem;
+  flex: 1 1 auto;
+}
+contentInject .modal .content .header {
+  font-family: 'Fira Sans';
+  font-size: 18px;
+  margin: 15px 0px 10px;
+  line-height: 1.4;
+  padding: 0px;
+}
+contentInject .modal .message {
+  background-color: #EAEAEA;
+  border-radius: 5px;
+  padding: 1rem;
+}
+contentInject .modal .actions {
+  padding: 2rem 2rem;
+  text-align: right;
+}
+contentInject .modal .actions .button {
+  margin: 0px 0px 0px 14px;
+}
+contentInject .fields {
+  display: flex;
+  flex-direction: row;
+  margin: 0rem -1rem -1rem;
+}
+contentInject .fields .field {
+  flex: 1 0 auto;
+  margin: 1rem 1rem;
+}
+contentInject .fields .field label {
+  display: block;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+contentInject .fields .field select,
+contentInject .fields .field input {
+  border: 1px solid #DDDDDD;
+  border-radius: 5px;
+  padding: 10px 8px;
+}
+contentInject .fields .field select,
+contentInject .fields .field input[type="text"] {
+  width: 100%;
+}
+contentInject .fields .field input:focus {
+  border: 1px solid #AAAAAA !important;
+  outline: none !important;
+}
+
+contentInject .fields .field.error select,
+contentInject .fields .field.error input[type="text"] {
+  background-color: #FFF6F6;
+  border-color: #EFB2B2;
+}
+
+contentInject .grid {
+  display: flex;
+  flex-direction: row;
+}
+contentInject .grid > .column {
+  flex-grow: 1;
+  width: 50%;
+}
+contentInject table td {
+  padding: 5px 8px;
+}
+contentInject table td:first-child {
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  font-size: 12px;
+  padding-left: 0px;
+}
+
+contentInject table td:last-child {
+  font-weight: bold;
+  color: #000000;
+}

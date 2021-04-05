@@ -1,0 +1,34 @@
+typeof Aura === "undefined" && (Aura = {});
+
+(function() { 
+	 function initAccessResources() {
+			 $A.componentService.addModule('markup://force:customPerms', 'force/customPerms', ['exports'], null, {}); 
+			 $A.componentService.addModule('markup://force:userPerms', 'force/userPerms', ['exports'], null, {}); 
+	 };
+	 if(Aura.frameworkJsReady)initAccessResources();else{Aura.beforeFrameworkInit=Aura.beforeFrameworkInit||[],Aura.beforeFrameworkInit.push(initAccessResources)}
+})(); 
+Aura.StaticResourceMap = {"angleDownW":{"Field_Trip":1613536592000},"nycvax_cp_design":{"":1615770169000},"Google_Translator":{"":1612041052000},"FieldTripGear":{"Field_Trip":1613536592000},"FTGearRingLead":{"Field_Trip":1613536592000},"nycvax_provider_logos":{"":1615770170000},"nycvax_design":{"":1615858386000},"iconNews":{"Field_Trip":1613536592000},"staticfiles":{"Field_Trip":1613536592000},"HL7_Parser":{"":1612109975000},"QRCode":{"":1612041052000},"RingLeadLogo":{"Field_Trip":1613536592000},"NYC_Favicon":{"":1612041052000},"version2":{"":1612109976000},"SiteSamples":{"":1611686610000}};
+
+(function() {
+function initResourceGVP() {
+if (!$A.getContext() || !$A.get('$Resource')) {
+$A.addValueProvider('$Resource',
+{
+merge : function() {},
+isStorable : function() { return false; },
+get : function(resource) {
+var modStamp, rel, abs, name, ns;
+var nsDelim = resource.indexOf('__');
+if (nsDelim >= 0) { ns = resource.substring(0, nsDelim); name = resource.substring(nsDelim + 2); } else { name = resource; }
+var srMap = Aura.StaticResourceMap[name];
+modStamp = srMap && srMap[ns = ns || Object.keys(srMap)[0]];
+if (!modStamp) { return; }
+rel = $A.get('$SfdcSite.pathPrefix');
+abs = $A.get('$Absolute.url');
+return [(abs || rel || ''), '/resource/', modStamp, '/', ns === '' ? name : ns + '__' + name].join('');
+}
+});
+}
+}
+if(Aura.frameworkJsReady)initResourceGVP();else{Aura.beforeFrameworkInit=Aura.beforeFrameworkInit||[],Aura.beforeFrameworkInit.push(initResourceGVP)}
+})();
