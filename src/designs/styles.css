@@ -26,6 +26,14 @@ contentInject .dimmer {
   z-index: 10;
   transition: 0.5s ease opacity;
 }
+contentInject .dimmer > canvas {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
 contentInject .dimmer .confetti {
   position: absolute;
   width: 100%;

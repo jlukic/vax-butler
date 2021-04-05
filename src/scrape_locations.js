@@ -22,3 +22,4 @@ $('.cWGcdI').each(function() {
 });
 
 locationJSON = JSON.stringify(locations);
+
