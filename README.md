@@ -8,7 +8,7 @@ Self-use Automated Appointment NYC Vaccination Booker
 # Vaccine Butler
 
 Key Features
-* Select what vaccine you want 
+* Search by desired vaccine
 * Choose location by borough, max travel distance
 * Select times based off min/max hour of day
 * Tool-assist booking, no remote server involved, book your own appointment directly from Chrome.
