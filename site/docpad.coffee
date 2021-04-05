@@ -22,7 +22,7 @@ docpadConfig = {
       url: "https://www.vaxbutler.nyc"
 
       # Update this flag whenever css/js should be reloaded
-      version: "1.0.0",
+      version: "1.0.1",
 
       # The default title of our website
       title: "Welcome | Vaccine Butler"
@@ -100,6 +100,21 @@ docpadConfig = {
       priority: 0.5
       filePath: 'sitemap.xml'
 
+    cleanurls:
+      static: true
+      getRedirectTemplate:(url, title) ->
+          """
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>#{title or 'Redirect'}</title>
+              <meta http-equiv="REFRESH" content="0; url=#{url}/">
+              <link rel="canonical" href="#{url}/" />
+            </head>
+            <body>
+            </body>
+          </html>
+          """
     copy:
       raw:
         src: 'files'
