@@ -10,5 +10,5 @@
   margin-top: 1rem;
 }
 #home .release a:not(:hover) {
-  color: #AAAAAA;
+  color: rgba(0, 0, 0, 0.4);
 }
