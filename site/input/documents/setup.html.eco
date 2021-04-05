@@ -1,0 +1,114 @@
+---
+layout       : 'default'
+menu         : 'default'
+section      : 'setup'
+standalone   : true
+priority     : 1.0
+title        : 'Set up'
+h1           : 'Set up Vaccine Butler'
+---
+
+<aboveFold>
+  <bg></bg>
+  <div class="ui container">
+    <img src="/images/hero2.png" class="hero">
+    <copy>
+      <h2 class="ui header">
+        Appointment Booking
+      </h2>
+      <p>
+        Vaccine butler is a <b>code snippet that you can run from your browser</b> to help automate your vaccine booking experience.
+      </p>
+      <p>Simply follow the steps below to save time and ensure you get exactly the appointment you want.</p>
+    </copy>
+  </div>
+</aboveFold>
+
+<belowFold>
+  <div class="ui container">
+    <div class="ui cards">
+      <div class="ui fluid card">
+        <div class="content">
+          <h3 class="ui header">
+            <span class="count">
+              <span class="number">1</span>
+            </span>
+            <span class="name">
+              Open Bookmark Bar
+            </span>
+          </h3>
+          <img src="/images/open-bookmarks.gif" class="ui right floated image">
+          <copy>
+            <p class="description">
+              Butler needs to add a link to your browser so you can run the tool while you are browsing the NYC website.
+            </p>
+            <div class="ui large message">
+              <p>To see the bookmark toolbar press <b>Ctrl + Shift + B</b> on PC or <b>CMD + Shift + B</b> on Mac.</p>
+            </div>
+          </copy>
+        </div>
+      </div>
+      <div class="ui fluid card">
+        <div class="content">
+          <h3 class="ui header">
+            <span class="count">
+              <span class="number">2</span>
+            </span>
+            <span class="name">
+              Add Bookmark to Toolbar
+            </span>
+          </h3>
+          <img src="/images/add-bookmark.gif" class="ui right floated image">
+          <copy>
+            <p class="description">
+              Click and drag the button below to your bookmark bar. This will let you run vaccine butler while you fill our your NYC forms.
+            </p>
+            <a class="ui huge secondary button" href="<%- @partial('bookmarklet') %>">
+              Vaccination Butler
+            </a>
+          </copy>
+        </div>
+      </div>
+      <div class="ui fluid card">
+        <div class="content">
+          <h3 class="ui header">
+            <span class="count">
+              <span class="number">3</span>
+            </span>
+            <span class="name">
+              Complete NYC Vaccine Eligibility Form
+            </span>
+          </h3>
+          <img src="/images/fill-form.gif" class="ui right floated image">
+          <copy>
+            <p class="description">
+              Visit the official
+              <a href="https://vax4nyc.nyc.gov/patient/s/vaccination-schedule" target="_blank">
+                NYC Vaccination Finder
+              </a>
+              site and follow the instructions to confirm eligibility and health screening.
+            </p>
+          </copy>
+        </div>
+      </div>
+      <div class="ui fluid card">
+        <div class="content">
+          <img src="/images/use-butler.gif" class="ui right floated image">
+          <copy>
+            <h3 class="ui header">
+              <span class="count">
+                <span class="number">4</span>
+              </span>
+              <span class="name">
+                Launch Vaccination Butler from Bookmark
+              </span>
+            </h3>
+            <p class="description">
+              When you are on the screen that shows available appointments, press the button on your bookmark toolbar to start running Vaccine Butler.
+            </p>
+          </copy>
+        </div>
+      </div>
+    </div>
+  </div>
+</belowFold>

@@ -16,9 +16,9 @@
   let
 
     // template code defined at bottom
-
     settingsModal,
     completedModal,
+    searchOverlay,
 
     // this is set to injected dom context
     domContext,
@@ -35,11 +35,11 @@
 
     // selector on external dom
     $ = function(query, context) {
-      if(context) {
+      if(context) {m
         return context.querySelectorAll(query);
       }
       let widget = document.querySelectorAll('.ui-widget');
-      if(widget) {
+      if(widget.length) {
         let lastWidget = widget[widget.length - 1];
         return lastWidget.querySelectorAll(query);
       }
@@ -62,6 +62,9 @@
 
     version             : '1.0.0',
 
+    // required URL to run script
+    bookingURL          : 'https://vax4nyc.nyc.gov/patient/s/vaccination-schedule',
+
     // whether to log behavior to console
     debug               : true,
 
@@ -74,7 +77,8 @@
 
     // whether to use interval or mutation observers
     // Note: mutation observers are currently not firing properly
-    // most likely due to intererence with sites render management
+    // most likely due to intererence from LockerService
+    // <https://developer.salesforce.com/blogs/developer-relations/2016/04/introducing-lockerservice-lightning-components.html>
     useInterval         : true,
 
     // ms between repeated queries
@@ -151,6 +155,7 @@
       tpl.clear.search();
 
       tpl.startTime = new Date();
+      tpl.show.searchOverlay();
 
       // NOTE
       // it appears something is preventing MutationObservers from reporting (maybe Recaptcha)
@@ -158,7 +163,7 @@
       if(tpl.useInterval) {
         let poll = function() {
           tpl.set.appointmentQuery();
-          setTimeout(tpl.event.documentChanged, tpl.checkInterval);
+          tpl.timer = setTimeout(tpl.event.documentChanged, tpl.checkInterval);
         };
         poll();
         tpl.interval = setInterval(poll, tpl.queryInterval);
@@ -168,6 +173,15 @@
         tpl.bind.documentObserver();
       }
 
+    },
+
+    stop() {
+      if(tpl.timer) {
+        clearTimeout(tpl.timer);
+      }
+      if(tpl.interval) {
+        clearInterval(tpl.interval);
+      }
     },
 
     destroy() {
@@ -244,12 +258,19 @@
         let
           settingsSubmitEl  = $$('settingsModal submit.button')[0],
           settingsCancelEl  = $$('settingsModal cancel.button')[0],
+          overlayModifyEl   = $$('overlay a.modify')[0],
+          overlayCancelEl   = $$('overlay a.cancel')[0],
           completedSubmitEl = $$('completedModal submit.button')[0],
           completedCancelEl = $$('completedModal cancel.button')[0],
           completedNewEl    = $$('completedModal new.button')[0]
         ;
+
         settingsSubmitEl.addEventListener('click', tpl.event.submitSettingsClick);
         settingsCancelEl.addEventListener('click', tpl.event.cancelSettingsClick);
+
+        overlayModifyEl.addEventListener('click', tpl.event.modifyOverlayClick);
+        overlayCancelEl.addEventListener('click', tpl.event.cancelOverlayClick);
+
         completedSubmitEl.addEventListener('click', tpl.event.completedSubmitClick);
         completedCancelEl.addEventListener('click', tpl.event.completedCancelClick);
         completedNewEl.addEventListener('click', tpl.event.completedNewClick);
@@ -614,7 +635,6 @@
         else {
           text += `${settings.maxHour - 12} PM`;
         }
-        console.log(text);
         return text.trim();
       },
       timeDiffText(startTime, endTime) {
@@ -632,6 +652,9 @@
           seconds
         ;
 
+        if(ms == 0) {
+          return '';
+        }
         if(ms < 1000) {
           return `${delta} ms`;
         }
@@ -714,6 +737,7 @@
           searchEl = $(selector.searchInput)[0]
         ;
         tpl.lastQueryTime = performance.now();
+        tpl.set.searchOverlayText();
         if(dateEl) {
           dateEl.value = tpl.get.displayDate();
         }
@@ -730,6 +754,20 @@
         if(existingZipcode) {
           zipcodeEl.value = existingZipcode.value;
         }
+      },
+      searchOverlayText() {
+        let
+          timeEl = $$('overlay .time')[0],
+          timeText
+        ;
+        if(tpl.startTime) {
+          timeText = tpl.get.timeDiffText(tpl.startTime, new Date());
+        }
+        else {
+          // timeText = 'Not running.';
+          timeText = '';
+        }
+        timeEl.innerHTML = timeText;
       },
       selectedAppointmentTable() {
         if(!tpl.selectedAppointment || !tpl.selectedTime) {
@@ -763,7 +801,7 @@
             matchingCount    : tpl.get.matchingCount(),
           }
         ;
-        console.log(values);
+        tpl.log('Appointment reserved', appointment);
         for(let [name, element] of Object.entries(elements)) {
           if(values[name]) {
             element.innerHTML = values[name];
@@ -791,11 +829,18 @@
     show: {
       modal(selector) {
         let
-          dimmerEl = document.querySelectorAll('contentInject .dimmer')[0],
+          dimmerEl = $$('contentInject .dimmer')[0],
           modalEl  = dimmerEl.querySelectorAll(selector)[0]
         ;
         dimmerEl.classList.add('visible');
         modalEl.classList.add('visible');
+      },
+      searchOverlay() {
+        let
+          overlayEl = $$('overlay')[0]
+        ;
+        tpl.set.searchOverlayText()
+        overlayEl.classList.add('visible');
       },
       confetti() {
         let
@@ -811,9 +856,7 @@
       },
       completedModal() {
         tpl.set.selectedAppointmentTable();
-        if(tpl.interval) {
-          clearInterval(tpl.interval);
-        }
+        tpl.hide.searchOverlay();
         tpl.show.modal('completedModal');
         tpl.show.confetti();
       }
@@ -827,6 +870,12 @@
         ;
         dimmerEl.classList.remove('visible');
         modalEl.classList.remove('visible');
+      },
+      searchOverlay() {
+        let
+          overlayEl = $$('overlay')[0]
+        ;
+        overlayEl.classList.remove('visible');
       },
       confetti() {
         let
@@ -1013,6 +1062,18 @@
           return;
         }
 
+        else if($(selector.errorModal).length > 0) {
+          // click the find new apt button
+          tpl.failedTime = tpl.selectedTime;
+          tpl.clear.selectedAppointment();
+          let
+            errorButtonEl = $(selector.errorModalButton)[0]
+          ;
+          if(errorButtonEl) {
+            errorButtonEl.click();
+          }
+        }
+
         // check if new page content is in the DOM
         else if($(selector.appointment).length > 0) {
           let
@@ -1043,22 +1104,11 @@
           return;
         }
 
-        else if($(selector.errorModal).length > 0) {
-          // click the find new apt button
-          tpl.failedTime = tpl.selectedTime;
-          tpl.clear.selectedAppointment();
-          let
-            errorButtonEl = $(selector.errorModalButton)[0]
-          ;
-          if(errorButtonEl) {
-            errorButtonEl.click();
-          }
-        }
-
         // check if made it to patient info screen
         else if($(selector.patientInfo).length > 0) {
           tpl.log('d) appointment selected. patient info screen');
           if(tpl.selectedAppointment) {
+            tpl.stop();
             tpl.show.completedModal();
           }
           else {
@@ -1116,6 +1166,15 @@
         tpl.hide.modal();
         tpl.start();
       },
+      modifyOverlayClick(event) {
+        tpl.stop();
+        tpl.hide.searchOverlay();
+        tpl.show.settingsModal();
+      },
+      cancelOverlayClick(event) {
+        tpl.hide.searchOverlay();
+        tpl.stop();
+      },
       cancelSettingsClick(event) {
         tpl.hide.modal();
       },
@@ -1150,9 +1209,42 @@
   contentInject {
     font-family: 'Fira Sans';
   }
+
+  /* Header */
   contentInject .header {
     font-family: 'Cormorant Garamond';
   }
+
+  /* Button */
+  contentInject .button {
+    display: inline-block;
+    cursor: pointer;
+    margin: 0px 7px 0px 0px;
+    background-color: #000000;
+    transition: 0.2s all ease;
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  contentInject .button {
+    background-color: #EEEEEE;
+    color: #555555;
+  }
+  contentInject .button:hover {
+    background-color: #DDDDDD;
+  }
+  contentInject .primary.button {
+    background-color: #000000;
+    color: #FFFFFF;
+  }
+  contentInject .primary.button:hover {
+    background-color: #EC5E5E;
+  }
+
+
+  /* Dimmer */
   contentInject .dimmer {
     position: fixed;
     top: 0px;
@@ -1186,31 +1278,8 @@
     pointer-events: auto;
     opacity: 1;
   }
-  contentInject .button {
-    cursor: pointer;
-    margin: 0px 7px 0px 0px;
-    background-color: #000000;
-    transition: 0.2s all ease;
-    padding: 12px 15px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 5px;
-  }
-  contentInject .button {
-    background-color: #EEEEEE;
-    color: #555555;
-  }
-  contentInject .button:hover {
-    background-color: #DDDDDD;
-  }
-  contentInject .primary.button {
-    background-color: #000000;
-    color: #FFFFFF;
-  }
-  contentInject .primary.button:hover {
-    background-color: #EC5E5E;
-  }
+
+  /* Modal */
   contentInject .modal {
     display: none;
     flex-direction: column;
@@ -1247,6 +1316,9 @@
     line-height: 1.4;
     padding: 0px;
   }
+  contentInject .modal .content p {
+    font-size: 14px !important;
+  }
   contentInject .modal .message {
     background-color: #EAEAEA;
     border-radius: 5px;
@@ -1259,6 +1331,8 @@
   contentInject .modal .actions .button {
     margin: 0px 0px 0px 14px;
   }
+
+  /* Forms */
   contentInject .fields {
     display: flex;
     flex-direction: row;
@@ -1296,6 +1370,7 @@
     border-color: #EFB2B2;
   }
 
+  /* Grid */
   contentInject .grid {
     display: flex;
     flex-direction: row;
@@ -1304,6 +1379,8 @@
     flex-grow: 1;
     width: 50%;
   }
+
+  /* Table */
   contentInject table td {
     padding: 5px 8px;
   }
@@ -1319,7 +1396,108 @@
     color: #000000;
   }
 
+  /* Loader */
+  contentInject .loader {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    left: -25px;
+  }
+  contentInject .loader:after {
+    animation: loader 500ms linear;
+    animation-iteration-count: infinite;
+    border-radius: 500rem;
+    border-color: #272727 #272727 #CCCCCC #CCCCCC;
+    border-style: solid;
+    border-width: 3px;
+  }
+  contentInject .loader:after,
+  contentInject .loader:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+  }
+  /* Active Animation */
+  @keyframes loader {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
+  contentInject overlay {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 430px;
+    padding: 20px 25px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    border: 1px solid #ECECEC;
+    box-shadow:
+      0px 15px 35px rgba(50, 50, 93, 0.1),
+      0px 5px 15px rgba(0, 0, 0, 0.07)
+    ;
+    z-index: 99999;
+    opacity: 0;
+    transform: translateY(-400px);
+    transition: transform 0.5s ease;
+  }
+  contentInject overlay.visible {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  contentInject overlay top {
+    display: flex;
+    flex-direction: row;
+  }
+  contentInject overlay top .content {
+    flex: 1 0 auto;
+  }
+  contentInject overlay top .content .status {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  contentInject overlay top .content .progress {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  contentInject overlay top .loader {
+    flex: 0 1 auto;
+  }
+  contentInject overlay top .loader + .content {
+    padding-left: 20px;
+  }
+  contentInject overlay bottom .logo {
+    float: right;
+    padding: 0px !important;
+  }
+  contentInject overlay bottom .logo img {
+    display: block;
+    height: 30px !important;
+  }
+  contentInject overlay bottom {
+    display: block;
+    padding: 1rem 0rem 0rem;
+  }
+  contentInject overlay bottom a {
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    vertical-align: top;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  contentInject overlay bottom a:hover {
+    color: #009FDA;
+    text-decoration: none !important;
+  }
   `;
 
   settingsModal = `
@@ -1559,11 +1737,33 @@
     </completedModal>
   `;
 
+  searchOverlay = `
+    <overlay>
+      <top>
+        <div class="content">
+          <div class="status">Finding appointment...</div>
+          <div class="progress">
+            <span class="time"></span>
+          </div>
+        </div>
+        <div class="loader"></div>
+      </top>
+      <bottom>
+        <a class="logo" href="https://www.vaccinebutler.com" target="_blank">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJMAAAAeCAYAAAAoyywTAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDA2IDc5LjE2NDc1MywgMjAyMS8wMi8xNS0xMTo1MjoxMyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjMgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFFNjUxQjA1OTYxQTExRUI5RUI4RDA0Q0U5RTY0QzhGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFFNjUxQjA2OTYxQTExRUI5RUI4RDA0Q0U5RTY0QzhGIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUU2NTFCMDM5NjFBMTFFQjlFQjhEMDRDRTlFNjRDOEYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUU2NTFCMDQ5NjFBMTFFQjlFQjhEMDRDRTlFNjRDOEYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4UEczrAAARqElEQVR42uxbC3RV1ZneN/cm5IUBwsMkPMMrkAdvqyRpqUDRTjutNRUhio8WtCzaUnCmaFNZdqaKI3aGWpcztYAiKFIrUToYITxEDM8QDAlJjPJKMLwSICTkcV/zfSf/iTvHe28CQpfMyl7rX/fknH322Wfvb3//9/9nx5aXl6cuXbqkVq1alfbZZ5/9Ys6cOYt69OhxhOcKCgqU2+1WHo8norCwcJXNZtsbGxu7FNfdMNW9e3eFe5TL5VJnz55NqKioeLJv3757hg0btqy6uloNHTpUJSUlqYiICLVhw4YFOTk5IzIzM+elpqY2KRS0q/SCe9Uzzzyjli9frnr37q06y41VHARFfn7+97Ozs9+tr69Xo0aNKrrjjjt+B+Co4OBgtXXrVoU6l8vLy79x5syZH8XHx89MTEx8Pi4ublXPnj0VzvcrKSlZWFpaOqempiasqampGPWMe0ePHq1qa2tVXV1d8Pvvv/9EUVFR9Pr164dNnDjx9qioKDfOKz7HLCEhISooKKhzVm7QEgQgxS9ZsuStxsZGFRoaqj788MO5mOCwQYMGKa/Xq44fP05A2MAuVZGRkaqqqioFgHh17dq1n4Fp3lizZs0JsNsvcX8YgYl76j///HOj8W7duikCbt++fQ+WlZVF83jv3r3ffPnll1+8ePGiunDhgiKD0c6dO6cAxi+xVWe5cYodk/cUJnsi3QqZ4cSJE5FgnxPJycn5nNjDhw+TWQiSn4Jx4sgkgwcPvjBw4MBsuMBSuLoIAKMf6zgcDtW1a9f3AI49GRkZavz48QogC1qxYsVqgLAnwcj7T548OR7AegsgPYvzikxGYB07dkzl5uYax+xLZ7nBwAS38jzcWy+yEl1MQ0ODwt8JKSkpf+rVq5e6fPkyAeEA2zwNoATDBS6dOnXqT/r06fM67v9o0qRJK3BcgMmPQ50B0dHRBwHGLSNHjlQDBgxQu3fvngYWmw+3ZgCJgHM6nWwXEqti55EjR9TRo0cJMLVz504Fl6lYl6zYWW4wMAEgT2FywwkkTmCXLl3o2qKhiQ7jWjHFM5gIPxG1aWlpjw0fPvwNgO3i+fPnVXNzswoLCyNAyhISEl6JiYk5ARCVo14ZGycQ33zzzRVob8BNN93UChDRRcVoJ4dCn6xGt0eWIth0HfU1KeNg78Hmwg7Djv8/mf9ujHs4JZyur6yZMMHONoock8lJ37Vr13zqKEZq+K0DoJYBBCWI2gxm4XnWZSGb0VUBgCvhvt6lmyLTffLJJ2mIAtMJJF0LESwwp/5MPot17HZ7azXYUNhIWAIs2NL3WFgibAQs4joP+n2wUbBk2OzrHRTBBst7DZf3j5bz17JMgn0MK4f98poIcExqG39CIFE4FxcX34ZIbQrYiUziJYMgUjOYi0KbmobMQx1EYc2/CSLWIVsRTBDbj5FxeI+18LlkKBrB5SOKY79ehB2AFcAmaNdChCnyYdv+AWDKhjGqqIGtvc7P6gnbLu9dRAaHnYR9Avsv2JCraG8m7DewH2jnb4b1l+NrEvX4jMPJFHQ90DtZZAoCxdQ8/CVQaOHh4QYImG+i8RzBxbQAxHRyQUHBDwjMjhSC2IdO4kASiaGwb2rnB8FS5FoF7Mx1nuAPYHHCEH+/3hE2rJe8M9novLznIGGQPAFCR0t32BrYv8N+pJ13aceea0WpPieWjFRUVPQtCONbb7755t1kFxrdHK9BbN+NSO87sbGxixHVnSIA+/XrZ7gqXt+8efPj1FUQ5B0S0yZLWcqbsPlyfJt2fqJ2/KpM9D8LwExW2wt7xdIeGWyOuE+WSthfNDCOh83SxuV9WI64ndtlgrcKa/wTLF2YcQfsZ8Ia1bDfwxq155JVZ8DCpW8bYRv8rSvYJQEQGeq74ubJiMMEaHzuX2HzxN0fhK0Txp4jYGO/T8AWam2znSzY/8LqAkzHXbCpAux62GvyDCVj/YD08wVxxw/Ctvj1w2SZ06dPqwMHDszPzMy8lwzFbDjzTgTMqVOn7kbkNSM1NfXP0E+nKNQR1Rn3gdUG7Nu3724edwRIbNdkO+ovTTftF7E7QERwGCUaLFW7/S3YswICvXBy02RwPTIInMAxlnqZor3ulUFzWNqYLqv4BTn3GwHTXJnonwp7DLFM2o81vfWqxQs8ClsM+107Q1Mv70s3v0fApMTdKq1PBQKmMO0cgfsR7BGtvVvE6uWar/JH2M8t5+bJ+KwXHfd7OZ8uFgk75zfdTMBQ++Tl5U2HXoqnLuLnjnHjxhkhf3p6+txZs2YlIrrLZxogOTnZcHFgMbV///4FYLQQ/t1hbvfNTJzEzdqKSJZj85c64hQsV2y2rMQKuf4TcQ8sqzQgEQxMbZwW9qKueEMDEgG6WyZtu8UNNMhvrfxGCxP8QZtksqRd2jWBdEg0y1+kzlMysYEKQf5b2J9hGRpbbxX3dUHOXdRYzTy2i+bK1dr7VEC30Y/OnKwBicC5U8YhRBaaXZjXLHcKkFg+DPjtgmAgO23fvn0BtRInm+eYf4JeugDAHTb1kqmrqqure2/dunU2gXgluSI/mkmJCzGLuTKHa1pGyYtOlYlaJuLcLH1gUeKmlEQw3xBGIkU/B3tcq/+ksMpt8jy6wB4+9IXHMgkE8RZtct2w72uMxHbfhT2h3TeznWEZKOw1W1iHjPKSgCZU64NbJ3oN5GXCoGZ5T5i2zPJOpn76hfw2CtPTVT6vSYQJsgD1skgW6QcBwUTBTZG9ZcuWWRDUMXRjlZWV6tChQ4zUfrtp06ZyhP9DYQYQmEXfsWPHQ6gbRtBdo8Tjdk1/ULvECziU6BVTT70hzOAS16YPbpKlPXPwzsuv7vr+ph1Xd1CgnpDfS/LrFJbTn/tvwig52rnkdto9BlsidlwAtUnc6+l2+uXWBLhZwvyIbq/mns2/N8n4PqPVG2C5L1skBvWUMyjQhPMaQQEAdQVIHjEjNmoa6KRuZ86c6VFYWNiFH4gHDhzIXFPItm3b5nXkgy3dqG7UTWZ0aOlThbglU8hmaBNGKo6RCOdeGbhVFj3QZBlEX8JTv958FYCP1FyLORk2YQ+zUPR/GzZW3ulzCfkDlUJhzcdF9AaJy/m5LKhmC3CafADM5gNg/oBnfsPqIhp1krDjMVlYp7Q6Ssb9i2gOwHBw8shCvoDF83RZcF0/mzZt2rPDhg1r4MQjelt4+fLlhf379zeEN6O53NzcWWCpvu1FcLwWHBzsYArBTGYSoAEy39kSwU3WXN1Hwlj3a/UeEDA9pIl0dqREq3Orj/aPaufTRVu0+VJwFVGyUzSdWX4lLkpJAraHuK2Olv7acZQsgCBLisdlWRjKkux1+3mnBi26HSj1JgiYzUw52zkrEsEXUJUDTHMR4OjVHjtVVVX1hrubPWHChD9yV0Bzc3NoQkJCNPTTSYLi4MGDdrDXfILKB7u0aU/0WC1TDQSmmdtiEtRPMbVIqBbWb9NWkdLcHV3XAu0ctdRS0QnDBZBvC9vx2tNC5TOk/p9kQKPEDX1HE9tXkiuyS2rBLI+IG6wQ0DstkZavMkr6RoA8bBmPasvnnvskXWEV1jXa8TRpL0cT70pC+2wJItIEOKz3sgDrYXmX/7ZEu20WWRDAVMFPI+1FWmQQgGURWMpOpkLo/9K6desq4drGMtL79NNP7youLk7Uv8H5AxMZCPrqWExMjBH90eLi4ozMO7/3+WAo+uQqP8J8nUbtj4rITdKE4hT5naWtwLtEwzARuloiree1kPpJSRDeLpPksuSqzNVqHVRTy/USAVwqzzGB8ZpotodE143yA8SemkZZJH3pqonoZ8Wl7dJ00Wvi6pWlf/yWuFPTnIukD3Ua0MYIkNZLDkqJLlsv4/lDGRNrsrNNuO6A1inPz8//NkEQCAC8XlJSEoOQP3PkyJGr3nnnnY/q6uqiMfGnyVw7d+7MIhDorgKBicBl/VtuuaWA0R8/v5iAZa6K+mvXrl1GhGgRi78S5nEKU+yWa2UCiixJH1RLVHIOtkLcnpIkZopEXbcKRRdJdpjlMaH1BwQIbhHj2wQkfxC9sF1LlpaJbjkn59ZoWuiyFsWVCpjjZGWTWVZKZMkBpp5QWsohS8Dg1Ni3Ut5B14MPC6gSZKH8WoA4VcS+0lIVy4RpnZLFLxP9uVQAXCp1vyfjd4+A1CX5uZVyvUpYK0pL27T4vKysrBnPPffc65xI88OtP3bix9zU1NSDS5YsGbN27VqmDNTixYuZFZ8yf/78zRTQdHmBokNuhBszZkzZwoULk/C3iwA0AUt2WrlypVq9evU13bZrgvtrtxuB6RAwvo0f18Xd2zqw09QrOrPdumz/H/jeDgjonCFDhpyHm+pON+OPVejmyCT79+8fvWfPnu9mZmZunDJlivHRd/ny5b8mw5BNAu2U5DUy09ixY98Cg7kIrDZhW0UFgWZskGMm3NcH4g6Dh+5U1LcdAOevh8D1MbDmYPsLQLwme7ScaGlXq+vzfqnnr12jf2BxBxZxMGSDG31z4Z09TqfPPraJBhBR8353Y2PAukHUr7judjp9v5fWLzP8VC07Oq4OTNA755OSkl6C3nnCX0RnFob8/N6Wk5PzL9A7G7m/++OPP54AgE2xbjPxVQgQAg7C/X9Y1woWukgyUmxsrCotLb1iMLHvbNfByBB95XEwfh3h4S25BLhQTpY++QQaJ4ernZPpFRC2Rp2417jW2JLqcqBPdpgTwYIHC8PY8Mf28euqr2+9j/WCZLcoJ91teS4nmvfxl+3zmP1woV23D93Y2le2Sw/C56F99stX3SCMQTCACpdiPN+sZz7bfFbrImmJsI2+cJ7M3RxXBCayQVpa2n/s3bv3UeihHpzsQIDidYBnUkpKytgRI0YcyMvLm0uGYVY80H3sGHciZGRkvADgVfAbn69BYFqB230BUnUln2MIHA6Asf0FA94QHAI3YDNEjkcAEtJOe/YAW4UdYW0j7pCuXb98v58dEkHcSeFvAYh746/xTxxkqoiIDrk59snaL19uzl89e1RUKyuxf0FujJO3pT/0NOaYdhhMZAIA4eLMmTMXLF269BVzz5IvYPAc2Ymb/48ePfpAcnJySVFR0fSIdl6eHeI9EO6nZsyYkcU2uvqYDCMMAii5dddMGXRUCzGZyn47JABoGXBba2q3jav6mhbTPXdYb3Wwbnv1vGIeD1gLR6b2JRa4EdKyQzbQggszbkpPT3+1rKxs6ttvv51J9jF3XPrqGMFTWFg4HUwTD1cXxof76zAnmhvkyDj333//dIColhvt/HWsneRlm9VpAshwK9JfriZD09i++EbQWdovNjET0MEYzxAAimBikMTFTb0bSPQ7uDuSE8tts3Bd98H9RMDF/JDM4Q9QBA+Ypk9lZeX3WC8QkBjqs53JkyffA7G+g88LlD4gGNpbSR68WBduWYmIJKoM1Lg8Xj0pG+pQtqe8XtsEryVL21l8AsmG+N8NmGTblXoRy9HDMbWJTguHJ/FifJuaGg09ZYQWPkbVwZyOLrARaWVgMl8HS91DRPpiHUPY4iH+0gAEEetQoMONNsC9ZQJA66mZyFBf1RVQXNrCwlWjQcrasvpicEY7PN5/dQd14qjDmrMlsXa7y+ZYrb74AN7qA202CPKwSGV3eRAgNBp/fwlMuu7gMRjKHR8fPx3aJe/QoUNP19TUhJNJzH+FChRCsxCAZvJy8ODB+xHqzwOa9xiIvgb5Dq6WILChJ5i5GZdPuvbYbIeaQ0JeDHW6xnltrZKgswSQtVieLpvdtrHB46r1N0u2IPB9SLCyNTX4dnNW7UJGoWvq16/fsj59+mwoLy9/Eq7vnrNnzxrhQASYymFhJIJL/r/OENZ9+/Y9OmjQoP/s37+/seuP4tuf4L46RAVIYeC8y26vr48MnxdWU9sJk44OKVg8rIsDbsyp/CkDxoZer//0j9+UN10S2OXI0KFDH0xMTFwCl3VnRUXF1IrKytsaABz5dyXIF3cTAGkHcM6BiT6IiYnJBQtthHBrJLiuJl/RkUimPTFp7/w38yt3dV8x2v0/AQYAnSHh5acyV4cAAAAASUVORK5CYII=">
+        </a>
+        <a class="modify">Modify Search</a>
+        <a class="cancel">Cancel</a>
+      </bottom>
+    </overlay>
+  `;
+
   html = `
     <div class="dimmer">
       ${settingsModal}
       ${completedModal}
     </div>
+    ${searchOverlay}
   `;
 
 

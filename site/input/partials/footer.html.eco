@@ -4,7 +4,7 @@ standalone : false
 <footer class="<%= @type %>">
   <div class="ui <%= if @type == 'inverted' then 'inverted' %> vertical footer segment">
     <div class="ui container">
-      © 2021 Vax Butler
+      © 2021 Vaccine Butler
     </div>
   </div>
 </footer>

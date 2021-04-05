@@ -21,6 +21,9 @@ head img {
    Page Layout
 ---------------*/
 
+body b {
+  color: #000000;
+}
 body > page {
   display: flex;
   flex-direction: column;
@@ -37,6 +40,9 @@ body > page > content {
 /* SEO Header */
 body > h1 {
   display: none !important;
+}
+body p {
+  font-size: 21px;
 }
 
 /*--------------
@@ -77,6 +83,9 @@ aboveFold copy .header {
 }
 aboveFold copy p {
   font-size: 21px !important;
+}
+aboveFold copy p b {
+  color: #000000;
 }
 aboveFold {
   position: relative;
@@ -149,8 +158,8 @@ topbar .github {
 .ribbon h2 + p {
   font-size: 21px;
 }
-.ribbon copy p {
-  font-size: 21px;
+.inverted.ribbon {
+  background-color: #DADADA;
 }
 
 /* Inverted Copy */
@@ -173,7 +182,7 @@ browser:not(.large) {
   box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
   border-radius: 5px;
   max-width: 100%;
-  height: 800px;
+  min-height: 700px;
 }
 browser navbar {
   flex-grow: 0;
@@ -209,10 +218,12 @@ browser screen iframe {
   border: none;
 }
 browser screen {
+  display: block;
   border-radius: 0px 0px 5px 5px;
   background-color: #ffffff;
 }
 browser screen img {
+  display: block;
   border-radius: 0px 0px 5px 5px;
 }
 

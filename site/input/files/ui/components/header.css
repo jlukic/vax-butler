@@ -749,7 +749,7 @@ h3.ui.header {
   letter-spacing: 1px;
   font-size: 24px;
   font-weight: 800;
-  text-transform: uppercase;
+  text-transform: none;
 }
 .ui.header:not(.icon) > .inverted.circular.icon {
   font-size: 16px !important;

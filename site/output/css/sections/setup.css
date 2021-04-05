@@ -1,0 +1,21 @@
+
+
+#setup belowFold {
+  padding-top: 8rem;
+}
+
+#setup belowFold .count {
+  color: #A54693;
+  font-size: 20px;
+  width: 28px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#setup belowFold .card .right.image {
+  margin: 0rem 0rem 0rem 1rem;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+#setup belowFold .card copy {
+  margin-right: 540px;
+}

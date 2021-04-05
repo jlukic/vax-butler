@@ -303,16 +303,16 @@
 
 /* Info */
 .ui.info.message {
-  background-color: #FFFFFF;
-  color: rgba(0, 0, 0, 0.8);
+  background-color: #F8FFFF;
+  color: #276F86;
 }
 .ui.info.message,
 .ui.attached.info.message {
-  -webkit-box-shadow: -4px 0px 0px 0px #4da678, 0 0px 14px 0 rgba(57, 76, 93, 0.13);
-          box-shadow: -4px 0px 0px 0px #4da678, 0 0px 14px 0 rgba(57, 76, 93, 0.13);
+  -webkit-box-shadow: 0px 0px 0px 1px #A9D5DE inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+          box-shadow: 0px 0px 0px 1px #A9D5DE inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
 }
 .ui.info.message .header {
-  color: #5CA57E;
+  color: #0E566C;
 }
 
 /* Warning */

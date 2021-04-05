@@ -36,9 +36,6 @@ docpadConfig = {
 
 
     getTitle: ->
-      # If job post use that name
-      if @document.jobName
-        "#{@document.jobName} | Vax Butler"
 
       # if we have a document title, then we should use that and suffix the site's title onto it
       if @document.title

@@ -23,11 +23,10 @@
 <!-- Site Properties -->
 <title>Welcome | Vaccine Butler</title>
 
-<!-- Favicon --><!--
+<!-- Favicon -->
 <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
- -->
+
 <!-- iPhone Icons -->
 <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png">
@@ -124,8 +123,8 @@
           <img src="/images/logo-header.png" class="ui logo image">
         </a>
       </div>
+      <a class=" item" href="/setup">Get Started</a>
       <!--  Not Yet
-      <a class=" item" href="/book">Book</a>
       <a class=" item" href="/faq">FAQ</a>
       <a class=" item" href="/about">About</a>
     -->
@@ -146,53 +145,74 @@
         <p>
           Vaccine butler automates the process of getting a vaccine appointment using the parameters you set up, to save you frustration.
         </p>
-        <showModal class="ui primary button">
-          Book NYC Vaccine
-        </showModal>
+        <a class="ui huge primary button" href="/setup">
+          Book NYC Appointment
+        </a>
       </copy>
     </div>
   </aboveFold>
   <belowFold>
     <div class="ribbon">
-    <div class="ui container">
-      <h2 class="ui header">
-        Current NYC Vaccine Groups
-      </h2>
+      <div class="ui container">
+        <h2 class="ui header">
+          Current NYC Vaccine Groups
+        </h2>
 
-      <div class="ui two cards">
-        <div class="ui card">
-          <div class="content">
-            <h3 class="ui header">
-              Ages 30+
-            </h3>
-            <p>
-              Opened <b>March 30th</b>
-            </p>
+        <div class="ui two cards">
+          <div class="ui card">
+            <div class="content">
+              <h3 class="ui header">
+                Ages 30+
+              </h3>
+              <p>
+                Opened <b>March 30th</b> to all NYC residents.
+              </p>
+            </div>
+            <div class="content">
+              <a class="ui basic button" href="https://www1.nyc.gov/site/doh/covid/covid-19-vaccine-eligibility.page">
+                Learn More
+              </a>
+            </div>
           </div>
-          <div class="content">
-            <a class="ui basic button" href="https://www1.nyc.gov/site/doh/covid/covid-19-vaccine-eligibility.page">
-              Learn More
-            </a>
+          <div class="ui card">
+            <div class="content">
+              <h3 class="ui header">
+                Ages 16+
+              </h3>
+              <p>
+                Opening <b>April 6th</b> to all NYC residents.
+              </p>
+            </div>
+            <div class="content">
+              <a class="ui basic button" href="https://www1.nyc.gov/site/doh/covid/covid-19-vaccine-eligibility.page">
+                Learn More
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="ui card">
-          <div class="content">
-            <h3 class="ui header">
-              Ages 16+
-            </h3>
-            <p>
-              Opening <b>April 6th</b>
-            </p>
-          </div>
-          <div class="content">
-            <a class="ui basic button" href="https://www1.nyc.gov/site/doh/covid/covid-19-vaccine-eligibility.page">
-              Learn More
-            </a>
-          </div>
+
         </div>
 
       </div>
-
+    </div>
+    <div class="inverted ribbon">
+      <div class="ui container">
+        <h2 class="ui header">
+          See In Action
+        </h2>
+        <p>
+          Vaccine butler works as an assistant while booking your NYC vaccination appointment, automatically refreshing the page and only selecting appointments that match your criteria.
+        </p>
+        <browser>
+          <navbar>
+            <circle class="one"></circle>
+            <circle class="two"></circle>
+            <circle class="three"></circle>
+          </navbar>
+          <screen>
+            <img src="/images/butler-demo.gif">
+          </screen>
+        </browser>
+      </div>
     </div>
   </belowFold>
 </content>
@@ -200,7 +220,7 @@
     <footer class="">
   <div class="ui  vertical footer segment">
     <div class="ui container">
-      © 2021 Vax Butler
+      © 2021 Vaccine Butler
     </div>
   </div>
 </footer>
