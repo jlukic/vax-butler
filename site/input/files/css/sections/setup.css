@@ -1,4 +1,7 @@
 
+#setup aboveFold .hero {
+  height: 336px;
+}
 
 #setup belowFold {
   padding-top: 8rem;

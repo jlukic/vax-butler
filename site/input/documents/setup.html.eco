@@ -11,7 +11,7 @@ h1           : 'Set up Vaccine Butler'
 <aboveFold>
   <bg></bg>
   <div class="ui container">
-    <img src="/images/hero2.png" class="hero">
+    <img src="/images/hero2.png" class="ui hero image">
     <copy>
       <h2 class="ui header">
         Appointment Booking
@@ -23,7 +23,6 @@ h1           : 'Set up Vaccine Butler'
     </copy>
   </div>
 </aboveFold>
-
 <belowFold>
   <div class="ui container">
     <div class="ui cards">
@@ -45,6 +44,8 @@ h1           : 'Set up Vaccine Butler'
             <div class="ui large message">
               <p>To see the bookmark toolbar press <b>Ctrl + Shift + B</b> on PC or <b>CMD + Shift + B</b> on Mac.</p>
             </div>
+            <p class="warning">
+              Note: Firefox is not currently supported. Please use Edge,
           </copy>
         </div>
       </div>

@@ -3,6 +3,15 @@
 *******************************/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
+  aboveFold copy {
+    max-width: 380px;
+  }
+  aboveFold copy .ui.header {
+    font-size: 38px !important;
+  }
+  aboveFold .hero {
+    height: 300px !important;
+  }
 
 }
 
