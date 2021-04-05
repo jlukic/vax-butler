@@ -60,6 +60,8 @@
 
   tpl = {
 
+    version             : '1.0.0',
+
     // whether to log behavior to console
     debug               : true,
 
