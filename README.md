@@ -1,5 +1,3 @@
-![Butler](https://vaccinebutler.com/images/logo.png)
-
 # Vaccine Butler
 Self-use Automated Appointment NYC Vaccination Booker
 
