@@ -2,7 +2,5 @@
   "name": "Vax-Butler",
   "private": true,
   "version": "1.0.0",
-  "description": "Vaccine butler helps book nyc vaccine appointments.",
-  "dependencies": {
-  },
+  "description": "Vaccine butler helps book nyc vaccine appointments."
 }

@@ -24,6 +24,25 @@ h1           : 'Set up Vaccine Butler'
   </div>
 </aboveFold>
 <belowFold>
+  <mobile>
+    <div class="ui container">
+      <h2 class="ui header">
+        Getting Started Guide
+      </h2>
+      <div class="ui cards">
+        <div class="ui fluid card">
+          <div class="content">
+            <h3 class="ui header">
+              Requires Desktop
+            </h3>
+            <p>
+              Vaccine buddy uses bookmarklets to run code snippets on a website. Please visit this page on a desktop computer
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mobile>
   <computer>
     <div class="ui container">
       <h2 class="ui header">
@@ -117,25 +136,32 @@ h1           : 'Set up Vaccine Butler'
         </div>
         <div class="ui fluid card">
           <div class="content">
+            <img src="/images/reload.gif" class="ui right floated image">
             <copy>
               <h3 class="ui header">
                 <span class="count">
                   <span class="number">5</span>
                 </span>
                 <span class="name">
-                  Wait for Your Appointment to Be Reserved
+                  Wait for Your Appointment to Book
                 </span>
               </h3>
               <p class="description">
-                Vaccine butler <b>will continuously refresh the page</b> until it finds an appointment that matches your criteria. You will see your screen flicker as it reloads the appointments, and it may take from a <b>few minutes up to a few hours</b> depending on your criteria.
+                Vaccine butler <b>will continuously refresh the page</b> until it finds an appointment that matches your criteria.
+              </p>
+              <p>
+                You will see your screen flicker as it reloads the appointments, and it may take from a <b>few minutes up to a few hours</b> depending on your criteria.
               </p>
               <p>
                 If it's able to snag that appointment before anyone else you'll be taken the confirmation screen.
+              </p>
+              <p class="ui large warning message">
+                Be sure to keep the tab active and not minimized, to ensure the script continues to run.
               </p>
             </copy>
           </div>
         </div>
       </div>
     </div>
-
+  </computer>
 </belowFold>

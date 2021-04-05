@@ -22,3 +22,21 @@
 #setup belowFold .card copy {
   margin-right: 540px;
 }
+
+
+#setup belowFold mobile {
+  display: none;
+}
+#setup belowFold computer {
+  display: block;
+}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+  #setup belowFold mobile {
+    display: block;
+  }
+  #setup belowFold computer {
+    display: none;
+  }
+}

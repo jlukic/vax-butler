@@ -22,7 +22,7 @@ docpadConfig = {
       url: "https://www.vaxbutler.nyc"
 
       # Update this flag whenever css/js should be reloaded
-      version: "1.0.5",
+      version: "1.0.6",
 
       # version of code
       updatedDate: '4/5/2021'
