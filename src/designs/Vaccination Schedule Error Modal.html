@@ -386,123 +386,40 @@ download a supported browser.
 </styleInject>
 <contentInject>
   <div class="dimmer visible">
-    <settingsModal class="modal visible">
+    <errorModal class="modal visible">
       <div class="header">
-        Set up Vax Butler
+        Wrong Domain - Vaccine Butler
       </div>
       <div class="content">
-        <p>Please enter your desired constraints for finding your vaccine booking.</p>
-        <form>
-          <div class="fields">
-            <div class="field">
-              <label>Zipcode</label>
-              <input name="zipcode" type="text">
-            </div>
-            <div class="field">
-              <label>Max Distance (Miles)</label>
-              <input name="maxDistance" value="30" type="text">
-            </div>
-            <div class="field">
-              <label>Borough</label>
-              <select name="borough">
-                <option value="Any">Any</option>
-                <option value="Brooklyn">Brooklyn</option>
-                <option value="Bronx">Bronx</option>
-                <option value="Manhattan">Manhattan</option>
-                <option value="Queens">Queens</option>
-                <option value="Staten Island">Staten Island</option>
-              </select>
-            </div>
-          </div>
-          <div class="fields">
-            <div class="field">
-              <label>Earliest Hour</label>
-              <select name="minHour">
-                <option value="0" selected>12:00 AM (Midnight)</option>
-                <option value="1">1:00 AM</option>
-                <option value="2">2:00 AM</option>
-                <option value="3">3:00 AM</option>
-                <option value="4">4:00 AM</option>
-                <option value="5">5:00 AM</option>
-                <option value="6">6:00 AM</option>
-                <option value="7" selected>7:00 AM</option>
-                <option value="8">8:00 AM</option>
-                <option value="9">9:00 AM</option>
-                <option value="10">10:00 AM</option>
-                <option value="11">11:00 AM</option>
-                <option value="12">12:00 PM (Noon)</option>
-                <option value="13">1:00 PM</option>
-                <option value="14">2:00 PM</option>
-                <option value="15">3:00 PM</option>
-                <option value="16">4:00 PM</option>
-                <option value="17">5:00 PM</option>
-                <option value="18">6:00 PM</option>
-                <option value="19">7:00 PM</option>
-                <option value="20">8:00 PM</option>
-                <option value="21">9:00 PM</option>
-                <option value="22">10:00 PM</option>
-                <option value="23">11:00 PM</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Latest Hour</label>
-              <select name="maxHour">
-                <option value="1">1:00 AM</option>
-                <option value="2">2:00 AM</option>
-                <option value="3">3:00 AM</option>
-                <option value="4">4:00 AM</option>
-                <option value="5">5:00 AM</option>
-                <option value="6">6:00 AM</option>
-                <option value="7">7:00 AM</option>
-                <option value="8">8:00 AM</option>
-                <option value="9">9:00 AM</option>
-                <option value="10">10:00 AM</option>
-                <option value="11">11:00 AM</option>
-                <option value="12">12:00 PM (Noon)</option>
-                <option value="13">1:00 PM</option>
-                <option value="14">2:00 PM</option>
-                <option value="15">3:00 PM</option>
-                <option value="16">4:00 PM</option>
-                <option value="17">5:00 PM</option>
-                <option value="18">6:00 PM</option>
-                <option value="19">7:00 PM</option>
-                <option value="20">8:00 PM</option>
-                <option value="21">9:00 PM</option>
-                <option value="22" selected>10:00 PM</option>
-                <option value="23">11:00 PM</option>
-                <option value="24">12:00 PM (Midnight)</option>
-              </select>
-            </div>
-          </div>
-          <h3 class="header">
-            Vaccine Selection
-          </h3>
-          <p>Limit appointments to only those offering:</p>
-          <div class="fields">
-            <div class="field">
-              <label>Pfizer (High Efficacy)</label>
-              <input name="vaccines[]" value="Pfizer" type="checkbox" checked>
-            </div>
-            <div class="field">
-              <label>Moderna (High Efficacy)</label>
-              <input name="vaccines[]" value="Moderna" type="checkbox" checked>
-            </div>
-            <div class="field">
-              <label>Johnson & Johnson (Single Dose)</label>
-              <input name="vaccines[]" value="Johnson & Johnson" type="checkbox" checked>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="actions">
+        <p>
+          Vaccine butler is designed to be run only while visiting <b>vax4nyc.nyc.gov</b>. For more information please review our <a href="https://www.vaccinebutler.com/setup">set up guide</a>.
+        </p>
+
+        <p>Click a link below to be redirected to the registration form for your vaccine</p>
+
+        <div class="error message">
+          You will need to restart vaccine butler after you are redirected to nyc.gov.
+        </div>
+
+        <a class="primary button" href="https://vax4nyc.nyc.gov/patient/s/vaccination-schedule">
+          Schedule First Dose
+        </a>
+        <a class="primary button" href="https://vax4nyc.nyc.gov/patient/s/dose2">
+          Schedule Second Dose
+        </a>
+        <br><br>
+        <a class="primary button" href="https://vax4nyc.nyc.gov/patient/s/">
+          Overview
+        </a>
+        <a class="primary button" href="https://vax4nyc.nyc.gov/patient/s/reschedule-appointment">
+          Reschedule
+        </a>
+        <br><br>
         <cancel class="button">
           Cancel
         </cancel>
-        <submit class="primary button">
-          Start Search
-        </submit>
       </div>
-    </settingsModal>
+    </errorModal>
   </div>
 </contentInject>
 

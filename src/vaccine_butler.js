@@ -19,6 +19,7 @@
     settingsModal,
     completedModal,
     searchOverlay,
+    errorModal,
 
     // this is set to injected dom context
     domContext,
@@ -64,6 +65,7 @@
     version             : '1.0.0',
 
     // required URL to run script
+    runDomain           : 'vax4nyc.nyc.gov',
     bookingURL          : 'https://vax4nyc.nyc.gov/patient/s/vaccination-schedule',
 
     // whether to log behavior to console
@@ -139,6 +141,7 @@
 
     initialize() {
 
+
       if(window.butler) {
         window.butler.destroy();
       }
@@ -146,6 +149,10 @@
       tpl.setup.styles();
       tpl.setup.html();
       tpl.setup.events();
+
+      if(tpl.check.wrongDomain()) {
+        return;
+      }
 
       tpl.show.settingsModal();
 
@@ -230,6 +237,22 @@
       }
     },
 
+    check: {
+      wrongDomain() {
+        let
+          href = window.location.href
+        ;
+        if(href.search('file://') == -1) {
+          //return false;
+        }
+        if(href.search(tpl.runDomain) == -1) {
+          tpl.show.errorModal();
+          return true;
+        }
+        return false;
+      }
+    },
+
     // handle inserting custom html/css into site
     setup: {
       html() {
@@ -263,7 +286,8 @@
           overlayCancelEl   = $$('overlay a.cancel')[0],
           completedSubmitEl = $$('completedModal submit.button')[0],
           completedCancelEl = $$('completedModal cancel.button')[0],
-          completedNewEl    = $$('completedModal new.button')[0]
+          completedNewEl    = $$('completedModal new.button')[0],
+          errorCancelEl     = $$('errorModal cancel.button')[0]
         ;
 
         settingsSubmitEl.addEventListener('click', tpl.event.submitSettingsClick);
@@ -275,6 +299,9 @@
         completedSubmitEl.addEventListener('click', tpl.event.completedSubmitClick);
         completedCancelEl.addEventListener('click', tpl.event.completedCancelClick);
         completedNewEl.addEventListener('click', tpl.event.completedNewClick);
+
+        errorCancelEl.addEventListener('click', tpl.event.errorCancelEl);
+
       },
     },
 
@@ -295,6 +322,16 @@
 
       unique(arr) {
         return arr.filter((value, index, self) => self.indexOf(value) === index);
+      },
+
+      searchDate() {
+        let
+          dateEl = $(selector.dateInput)[0]
+        ;
+        if(!dateEl) {
+          return;
+        }
+        return dateEl.value;
       },
 
       // format required for nyc date input
@@ -580,6 +617,7 @@
 
           appointmentData = {
             name          : name,
+            date          : tpl.get.searchDate(),
             miles         : miles,
             address       : address,
             times         : times,
@@ -805,7 +843,7 @@
           },
           values = {
             name             : appointment.name,
-            time             : time.text,
+            time             : `${appointment.date || ''} ${time.text}`,
             address          : tpl.get.htmlAddress(appointment.address),
             distance         : `${appointment.miles} miles`,
             vaccines         : tpl.get.vaccineText(appointment.vaccines),
@@ -854,7 +892,7 @@
         let
           overlayEl = $$('overlay')[0]
         ;
-        tpl.set.searchOverlayText()
+        tpl.set.searchOverlayText();
         overlayEl.classList.add('visible');
       },
       confetti() {
@@ -874,6 +912,9 @@
         tpl.hide.searchOverlay();
         tpl.show.modal('completedModal');
         tpl.show.confetti();
+      },
+      errorModal() {
+        tpl.show.modal('errorModal');
       }
     },
 
@@ -1206,6 +1247,10 @@
         tpl.hide.modal();
         tpl.initialize();
       },
+      errorCancelEl(event) {
+        tpl.hide.modal();
+        tpl.destroy();
+      },
     },
 
 
@@ -1228,6 +1273,17 @@
     /* Header */
     contentInject .header {
       font-family: 'Cormorant Garamond';
+    }
+
+    contentInject .error.message {
+      background-color: #fff7f7 !important;
+      color: #e03737;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    contentInject a {
+      text-decoration: none !important;
     }
 
     /* Button */
@@ -1449,7 +1505,7 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      width: 470px;
+      width: 450px;
       padding: 20px 25px;
       border-radius: 5px;
       background-color: #FFFFFF;
@@ -1529,6 +1585,10 @@
       color: #009FDA;
       text-decoration: none !important;
     }
+    contentInject errorModal p {
+      font-size: 16px;
+    }
+
   `;
 
   settingsModal = `
@@ -1803,10 +1863,48 @@
     </overlay>
   `;
 
+  errorModal = `
+    <errorModal class="modal">
+      <div class="header">
+        Wrong Domain - Vaccine Butler
+      </div>
+      <div class="content">
+        <p>
+          Vaccine butler is designed to be run only while visiting <b>vax4nyc.nyc.gov</b>. For more information please review our <a href="https://www.vaccinebutler.com/setup">set up guide</a>.
+        </p>
+
+        <p>Click a link below to be redirected to the registration form for your vaccine</p>
+
+        <div class="error message">
+          You will need to restart vaccine butler after you click a link below.
+        </div>
+
+        <a class="primary button" href="https://vax4nyc.nyc.gov/patient/s/vaccination-schedule">
+          Schedule First Dose
+        </a>
+        <a class="primary button" href="https://vax4nyc.nyc.gov/patient/s/dose2">
+          Schedule Second Dose
+        </a>
+        <br><br>
+        <a class="primary button" href="https://vax4nyc.nyc.gov/patient/s/">
+          Overview
+        </a>
+        <a class="primary button" href="https://vax4nyc.nyc.gov/patient/s/reschedule-appointment">
+          Reschedule
+        </a>
+        <br><br>
+        <cancel class="button">
+          Cancel
+        </cancel>
+      </div>
+    </errorModal>
+  `;
+
   html = `
     <div class="dimmer">
       ${settingsModal}
       ${completedModal}
+      ${errorModal}
     </div>
     ${searchOverlay}
   `;
