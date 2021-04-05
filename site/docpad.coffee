@@ -26,7 +26,7 @@ docpadConfig = {
 
       # version of code
       updatedDate: '4/5/2021'
-      packageVersion: "1.0.1",
+      packageVersion: "1.0.2",
 
 
       # The default title of our website
