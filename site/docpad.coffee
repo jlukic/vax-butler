@@ -100,24 +100,6 @@ docpadConfig = {
       priority: 0.5
       filePath: 'sitemap.xml'
 
-    cleanurls:
-      static: true
-      getRedirectTemplate:(url, title) ->
-          """
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <title>#{title or 'Redirect'}</title>
-              <meta http-equiv="REFRESH" content="0; url=#{url}">
-              <link rel="canonical" href="#{url}" />
-            </head>
-            <body>
-            </body>
-          </html>
-          """
-      # simpleRedirects:
-        # '/test'               : '',
-
     copy:
       raw:
         src: 'files'
