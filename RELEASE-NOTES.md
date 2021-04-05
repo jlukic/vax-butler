@@ -11,3 +11,4 @@
 ### Version 1.0.2 - April 4, 2021 7PM
 - Add date to completion modal
 - Add error modal if triggering on different domain
+- Updated scraped vaccine data json
