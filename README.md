@@ -22,3 +22,6 @@ Vaccine butler is a script designed to run ontop of NYC's Vaccine Finder website
 
 ## User Support
 We will be adding chat support shortly to help provide help using the tool.
+
+## Demo
+![Screen](https://vaccinebutler.com/images/demo.gif)
