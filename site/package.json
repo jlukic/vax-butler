@@ -31,14 +31,6 @@
   "scripts": {
     "start": "gulp build && node_modules/.bin/docpad-server"
   },
-  "browserslist": [
-    "last 2 versions",
-    "> 1%",
-    "Safari 9",
-    "Opera 12.1",
-    "bb 10",
-    "Android 4"
-  ],
   "devDependencies": {
     "gulp-postcss": "^9.0.0",
     "postcss-css-variables": "^0.17.0"
