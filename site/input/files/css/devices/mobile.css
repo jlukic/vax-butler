@@ -10,6 +10,7 @@
     height: auto !important;
   }
   aboveFold .hero.image {
+    float: none;
     position: static;
     height: 200px !important;
     margin: 0 auto 2rem;

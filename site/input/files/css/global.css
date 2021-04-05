@@ -93,9 +93,7 @@ aboveFold {
   padding: 8rem 0rem;
 }
 aboveFold img.hero {
-  position: absolute;
-  right: 0rem;
-  top: 0px;
+  float: right;
   height: 400px;
 }
 aboveFold .ui.container {

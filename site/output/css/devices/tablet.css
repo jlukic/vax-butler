@@ -2,7 +2,9 @@
           Tablet Only
 *******************************/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-
+  aboveFold {
+    height: auto;
+  }
   aboveFold copy {
     max-width: 380px;
   }
