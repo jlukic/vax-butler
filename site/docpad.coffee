@@ -19,10 +19,10 @@ docpadConfig = {
     site:
 
       # The production url of our website
-      url: "https://www.vaxbutler.nyc"
+      url: "https://vaccinebutler.com"
 
       # Update this flag whenever css/js should be reloaded
-      version: "1.0.8",
+      version: "1.0.9",
 
       # version of code
       updatedDate: '4/5/2021'
@@ -30,14 +30,17 @@ docpadConfig = {
 
 
       # The default title of our website
-      title: "Welcome | Vaccine Butler"
+      title: "Vaccine Butler"
 
       # The website description (for SEO)
-      description: """Vaccine butler helps users book vaccine appointments"""
+      description: """Vaccine butler helps users automatically book vaccine appointments in NYC."""
 
       # The website keywords (for SEO) separated by commas
       keywords: """nyc, vaccine, scheduler, helper, butler"""
 
+
+    getURL: ->
+      @site.url
 
 
     getTitle: ->
