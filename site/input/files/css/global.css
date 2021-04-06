@@ -134,8 +134,13 @@ topBar {
 topbar .logo.image {
   height: 30px;
 }
+topbar .tweet,
 topbar .github {
+  margin-top: 7px;
   float: right;
+}
+topbar .tweet {
+  margin-right: 10px;
 }
 
 

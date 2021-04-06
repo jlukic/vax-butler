@@ -26,6 +26,7 @@
   }
 
   topbar .github {
+    display: none;
     width: 50px;
     margin-top: 6px;
   }
