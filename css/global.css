@@ -1,0 +1,260 @@
+body {
+  min-height: 100%;
+  height: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body > .dimmer {
+  will-change: opacity, transform;
+}
+
+/*--------------
+   Tracking
+---------------*/
+
+/* pixel trackers */
+head img {
+  display: none;
+}
+
+/*--------------
+   Page Layout
+---------------*/
+
+body b {
+  color: #000000;
+}
+body > page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+body > page > content > * {
+  display: block;
+}
+body > page > content {
+  display: block;
+  flex-grow: 1;
+}
+
+/* SEO Header */
+body > h1 {
+  display: none !important;
+}
+body p {
+  font-size: 21px;
+}
+
+/*--------------
+   Above Fold
+---------------*/
+
+aboveFold {
+  position: relative;
+  height: 450;
+  padding: 8rem 0rem;
+}
+
+aboveFold,
+aboveFold bg {
+  background-size: cover;
+}
+aboveFold bg {
+  z-index: 1;
+  position: absolute;
+  transform-origin: 50% 50%;
+  top: -150%;
+  right: -50%;
+  width: 200%;
+  height: 250%;
+  border-radius: 100%;
+  pointer-events: none;
+  background-image: linear-gradient(180deg, #FFFFFF, #FFC9CA);
+}
+aboveFold > :not(bg) {
+  position: relative;
+  z-index: 2;
+}
+aboveFold copy .header {
+  font-size: 48px !important;
+  line-height: 1.2 !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+}
+aboveFold copy p {
+  font-size: 21px !important;
+}
+aboveFold copy p b {
+  color: #000000;
+}
+aboveFold {
+  position: relative;
+  height: 450px;
+  padding: 8rem 0rem;
+}
+aboveFold img.hero {
+  float: right;
+  height: 400px;
+}
+aboveFold .ui.container {
+  position: relative;
+  z-index: 2;
+}
+
+aboveFold copy {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+}
+aboveFold .header {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 48px;
+}
+aboveFold p {
+  font-size: 19px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/*--------------
+    Top Bar
+---------------*/
+
+topBar .item > .ui.button {
+  font-size: 12px !important;
+}
+topBar {
+  position: absolute;
+  top: 25px;
+  width: 100%;
+  left: 0px;
+  padding: 0px;
+  z-index: 100;
+  will-change: background, padding, transform;
+}
+topbar .logo.image {
+  height: 30px;
+}
+topbar .tweet,
+topbar .github {
+  margin-top: 7px;
+  float: right;
+}
+topbar .tweet {
+  margin-right: 10px;
+}
+
+
+/*--------------
+     Ribbon
+---------------*/
+
+.ribbon {
+  position: relative;
+  padding: 90px 0;
+}
+.ribbon h1 {
+  display: none;
+}
+.ribbon h2 {
+  font-size: 36px;
+}
+.ribbon h2 + p {
+  font-size: 21px;
+}
+.inverted.ribbon {
+  background-color: #DADADA;
+}
+
+/* Inverted Copy */
+.ribbon copy.inverted .header {
+  color: #ffffff;
+}
+.ribbon copy.inverted p {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/*--------------
+    Browser
+---------------*/
+
+browser {
+  display: flex;
+  flex-direction: column;
+}
+browser:not(.large) {
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  border-radius: 5px;
+  max-width: 100%;
+}
+browser navbar {
+  flex-grow: 0;
+  background-color: #f3f3f3;
+  height: 28px;
+  padding: 10px 12px;
+  box-shadow: 0px -2px 3px -2px rgba(0, 0, 0, 0.1) inset;
+  border-radius: 5px 5px 0px 0px;
+}
+browser navbar circle {
+  float: right;
+  margin-left: 5px;
+  border-radius: 500px;
+  width: 8px;
+  height: 8px;
+}
+browser navbar circle.one {
+  background-color: #7cc04f;
+}
+browser navbar circle.two {
+  background-color: #e9bc33;
+}
+browser navbar circle.three {
+  background-color: #e45d55;
+}
+browser screen {
+  flex-grow: 1;
+}
+browser screen iframe {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+}
+browser screen {
+  display: block;
+  border-radius: 0px 0px 5px 5px;
+  background-color: #ffffff;
+}
+browser screen img {
+  width: 100%;
+  display: block;
+  border-radius: 0px 0px 5px 5px;
+}
+
+
+
+/*--------------
+     Footer
+---------------*/
+
+footer {
+  padding: 30px 0px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+/*--------------
+   Responsive
+---------------*/
+
+/* Computer */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+}
