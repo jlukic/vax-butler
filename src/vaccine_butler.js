@@ -66,12 +66,10 @@
 
     // required URL to run script
     runDomain           : 'vax4nyc.nyc.gov',
-    bookingURL          : 'https://vax4nyc.nyc.gov/patient/s/vaccination-schedule',
 
     // whether to log behavior to console
     debug               : true,
 
-    reloadDelay         : 10,
 
     // for tracking metrics
     startTime           : false,
@@ -84,11 +82,8 @@
     // <https://developer.salesforce.com/blogs/developer-relations/2016/04/introducing-lockerservice-lightning-components.html>
     useInterval         : true,
 
-    // ms between repeated queries
-    queryInterval       : 1000,
-
-    // ms after query to check results
-    checkInterval       : 1000,
+    // percent of interval to adjust timing to add jitter
+    jitterRatio         : 0.2,
 
     // maximum edit distance for location to be considered same
     maxEditDistance     : 0,
@@ -112,13 +107,25 @@
       [255, 255, 255] // white
     ],
 
+    // minimum permissable search interval
+    minSearchInterval: 10,
+
+    // frequency to update stats
+    updateStatsInterval: 1000,
+
     defaults: {
-      zipcode  : 11222,
-      borough  : 'Brooklyn',
-      maxMiles : 30,
-      minHour  : 0,
-      maxHour  : 24,
-      vaccines : ['Moderna', 'Pfizer', 'Johnson & Johnson'],
+      // frequency of search in seconds
+      searchInterval : 35,
+
+      // seconds after query to check results
+      checkDelay     : 1,
+
+      zipcode        : 11222,
+      borough        : 'Brooklyn',
+      maxMiles       : 30,
+      minHour        : 0,
+      maxHour        : 24,
+      vaccines       : ['Moderna', 'Pfizer', 'Johnson & Johnson'],
     },
     settings: {},
 
@@ -132,8 +139,8 @@
       miles            : '.slds-m-bottom_none',
       time             : 'lightning-formatted-time',
       name             : '.page-h3',
-      nextButton       : '.slds-button.slds-button_brand',
-      previousButton   : '.slds-button_outline-brand',
+      nextButton       : '.btn-section .slds-button.slds-button_brand',
+      previousButton   : '.btn-section .slds-button_outline-brand',
       errorModal       : '.slds-modal .help_text--red',
       errorModalButton : '.slds-modal .slds-button_brand'
     },
@@ -157,55 +164,61 @@
       tpl.show.settingsModal();
 
     },
-
     start(settings = tpl.defaults) {
 
       tpl.clear.search();
 
       tpl.startTime = new Date();
-      tpl.show.searchOverlay();
+
+      // update overlay text
+      tpl.set.searchOverlayText();
+      tpl.overlayInterval = setInterval(tpl.set.searchOverlayText, tpl.updateStatsInterval);
 
       // NOTE
       // it appears something is preventing MutationObservers from reporting (maybe Recaptcha)
       // A more brutish method with interval is necessary to handle refresh
       if(tpl.useInterval) {
-        let poll = function() {
-          tpl.set.appointmentQuery();
-          tpl.timer = setTimeout(tpl.event.documentChanged, tpl.checkInterval);
-        };
-        poll();
-        tpl.interval = setInterval(poll, tpl.queryInterval);
+        tpl.search();
       }
       else {
         tpl.set.appointmentQuery();
         tpl.bind.documentObserver();
       }
 
+      tpl.show.searchOverlay();
+    },
+
+    search() {
+      tpl.set.appointmentQuery();
+      clearTimeout(tpl.checkTimer);
+      tpl.checkTimer = setTimeout(function() {
+        tpl.event.documentChanged();
+      }, tpl.get.checkDelay());
+    },
+
+    searchAgain() {
+      tpl.searchTimer = setTimeout(tpl.search, tpl.get.searchInterval());
     },
 
     stop() {
-      if(tpl.timer) {
-        clearTimeout(tpl.timer);
+      if(tpl.observer) {
+        tpl.observer.disconnect();
       }
-      if(tpl.interval) {
-        clearInterval(tpl.interval);
+      if(tpl.searchTimer) {
+        clearTimeout(tpl.searchTimer);
+      }
+      if(tpl.checkTimer) {
+        clearTimeout(tpl.checkTimer);
+      }
+      if(tpl.overlayInterval) {
+        clearInterval(tpl.overlayInterval);
       }
     },
 
     destroy() {
       tpl.log('Tearing down butler');
-
+      tpl.stop();
       tpl.teardown.domElements();
-
-      // remove observers
-      if(tpl.observer) {
-        tpl.observer.disconnect();
-      }
-
-      // remove intervals
-      if(tpl.interval) {
-        clearInterval(tpl.interval);
-      }
     },
 
     log(a, b, c, d) {
@@ -322,6 +335,19 @@
 
       unique(arr) {
         return arr.filter((value, index, self) => self.indexOf(value) === index);
+      },
+
+      searchInterval() {
+        return (settings.searchInterval * 1000) + tpl.get.jitter();
+      },
+
+      checkDelay() {
+        return (settings.checkDelay * 1000) + tpl.get.jitter();
+      },
+
+      // add random jitter to requests times
+      jitter() {
+        return (Math.random() * tpl.jitterRatio);
       },
 
       searchDate() {
@@ -776,7 +802,6 @@
           searchEl = $(selector.searchInput)[0]
         ;
         tpl.lastQueryTime = performance.now();
-        tpl.set.searchOverlayText();
         if(dateEl) {
           dateEl.value = null;
           dateEl.value = tpl.get.displayDate();
@@ -788,11 +813,19 @@
       },
       defaultSettings() {
         let
-          existingZipcode = $(selector.searchInput)[0],
-          zipcodeEl = $$('settingsModal input[name="zipcode"]')[0]
+          existingZipcode  = $(selector.searchInput)[0],
+          zipcodeEl        = $$('settingsModal input[name="zipcode"]')[0],
+          searchIntervalEl = $$('settingsModal input[name="searchInterval"]')[0],
+          checkDelayEl     = $$('settingsModal input[name="checkDelay"]')[0]
         ;
         if(existingZipcode) {
           zipcodeEl.value = existingZipcode.value;
+        }
+        if(tpl.defaults.searchInterval) {
+          searchIntervalEl.value = tpl.defaults.searchInterval;
+        }
+        if(tpl.defaults.checkDelay) {
+          checkDelayEl.value = tpl.defaults.checkDelay;
         }
       },
       searchOverlayText() {
@@ -807,6 +840,7 @@
             appointmentCount : $$('overlay .appointmentCount')[0],
             matchingCount    : $$('overlay .matchingCount')[0],
             criteria         : $$('overlay .criteria')[0],
+            searchInterval   : $$('overlay .searchInterval')[0],
           },
           values = {
             totalTime        : tpl.get.timeDiffText(tpl.startTime, new Date()) || '',
@@ -814,6 +848,7 @@
             appointmentCount : tpl.get.appointmentCount(),
             matchingCount    : tpl.get.matchingCount(),
             criteria         : tpl.get.criteriaText(settings),
+            searchInterval   : settings.searchInterval,
           }
         ;
         for(let [name, element] of Object.entries(elements)) {
@@ -892,7 +927,6 @@
         let
           overlayEl = $$('overlay')[0]
         ;
-        tpl.set.searchOverlayText();
         overlayEl.classList.add('visible');
       },
       confetti() {
@@ -1083,22 +1117,11 @@
       documentChanged(mutations) {
 
         if(tpl.useInterval) {
-          tpl.log('Interval fired');
+          tpl.log('Checking for results');
         }
         else {
           tpl.log('Mutations detected', mutations);
         }
-
-        let
-          searchAgain = function() {
-            // interval will handle searching again
-            // unless we are using mutation observers
-            if(!tpl.useInterval) {
-              tpl.log('Triggering new search');
-              setTimeout(tpl.set.appointmentQuery, tpl.reloadDelay);
-            }
-          }
-        ;
         /*
         // results are loading still
         if($(selector.loader).length > 0) {
@@ -1114,7 +1137,7 @@
             executionTime : performance.now() - tpl.lastQueryTime,
             appointments  : []
           });
-          searchAgain();
+          tpl.searchAgain();
           return;
         }
 
@@ -1149,7 +1172,7 @@
 
           if(matchingAppointments.length == 0) {
             tpl.log('No matching appointments found', appointments);
-            searchAgain();
+            tpl.searchAgain();
             return;
           }
           let
@@ -1208,8 +1231,13 @@
               }
             }
             else {
-              if(['maxMiles', 'minHour', 'maxHour'].includes(name)) {
+              if(['searchInterval', 'maxDistance', 'checkDelay', 'minHour', 'maxHour'].includes(name)) {
                 value = Number(value);
+
+                // prevent low values for interval
+                if(name == 'searchInterval' && value < tpl.minSearchInterval) {
+                  value = tpl.minSearchInterval;
+                }
               }
               settings[name] = value;
             }
@@ -1594,10 +1622,10 @@
   settingsModal = `
     <settingsModal class="modal">
       <div class="header">
-        Set up Vaccine Butler
+        Set up Vax Butler
       </div>
       <div class="content">
-        <p>Please enter your desired constraints for finding your vaccine booking. This process may take from a few minutes to a few hours depending on availability.</p>
+        <p>Please enter your desired constraints for finding your vaccine booking.</p>
         <form>
           <div class="fields">
             <div class="field">
@@ -1606,7 +1634,7 @@
             </div>
             <div class="field">
               <label>Max Distance (Miles)</label>
-              <input name="maxMiles" value="30" type="text">
+              <input name="maxDistance" value="30" type="text">
             </div>
             <div class="field">
               <label>Borough</label>
@@ -1683,7 +1711,7 @@
           <h3 class="header">
             Vaccine Selection
           </h3>
-          <p>Limit locations to only those offering:</p>
+          <p>Limit appointments to only those offering:</p>
           <div class="fields">
             <div class="field">
               <label>Pfizer (High Efficacy)</label>
@@ -1696,6 +1724,22 @@
             <div class="field">
               <label>Johnson & Johnson (Single Dose)</label>
               <input name="vaccines[]" value="Johnson & Johnson" type="checkbox" checked>
+            </div>
+          </div>
+          <h3 class="header">
+            Configure Butler
+          </h3>
+          <p>
+            <b>Note: Searching too quickly may cause errors that block you out of the system.</b>
+          </p>
+          <div class="fields">
+            <div class="field">
+              <label>Repeat Search Every (X) Seconds</label>
+              <input name="searchInterval" value="1" type="text">
+            </div>
+            <div class="field">
+              <label>Check Page (X) Seconds After Search</label>
+              <input name="checkDelay" value="1" type="text">
             </div>
           </div>
         </form>
@@ -1836,8 +1880,11 @@
           <div class="progress">Note: Screen may flicker with reloads</div>
           <div class="stats">
             <div class="stat">
-              <b>Searched <span class="searchCount"></span> times</b>, time elapsed
+              <b><span class="searchCount"></span></b> made, time elapsed
               <b><span class="totalTime"></span></b>.
+            </div>
+            <div class="stat">
+              Searching every <b><span class="searchInterval"></span> seconds</b>
             </div>
             <div class="stat">
               <b><span class="appointmentCount"></span> appointments</b> returned so far.
