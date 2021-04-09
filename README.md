@@ -28,9 +28,9 @@ We will be adding chat support shortly to help provide help using the tool.
 
 ## Developing Notes / Build Instructions
 
-The whole bookmarklet can be found in [vaccine_butler.js](https://github.com/jlukic/vax-butler/blob/main/src/vaccine_butler.js). This also includes some templates and css that are (for now) manually copy and pasted in from the designs in https://github.com/jlukic/vax-butler/tree/main/src/designs 
+The whole bookmarklet can be found in [vaccine_butler.js](https://github.com/jlukic/vax-butler/blob/main/src/vaccine_butler.js). This also includes some templates and css that are (for now) manually copy and pasted in from the designs [found here](https://github.com/jlukic/vax-butler/tree/main/src/designs)
 
-Vaccine info is created by generating a JSON file using the script https://github.com/jlukic/vax-butler/blob/main/src/scrape_locations.js on the URL https://vaccinefinder.nyc.gov/locations. You can do this directly from the chrome console and then paste into https://github.com/jlukic/vax-butler/blob/main/src/vaccine_butler.js
+Vaccine info is created by generating a JSON file using the script [scrape_locations.js](https://github.com/jlukic/vax-butler/blob/main/src/scrape_locations.js) on the URL https://vaccinefinder.nyc.gov/locations. You can do this directly from the chrome console and then paste into https://github.com/jlukic/vax-butler/blob/main/src/vaccine_butler.js
 
 The bookmarklet code is generated manually using [UglifyJS](https://github.com/mishoo/UglifyJS) (Minification) + [Bookmarkleter](https://chriszarate.github.io/bookmarkleter/) (Escaping).
 
