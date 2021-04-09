@@ -25,3 +25,15 @@ We will be adding chat support shortly to help provide help using the tool.
 
 ## Demo
 ![Screen](https://vaccinebutler.com/images/demo.gif)
+
+## Developing Notes / Build Instructions
+
+The whole bookmarklet can be found in [vaccine_butler.js](https://github.com/jlukic/vax-butler/blob/main/src/vaccine_butler.js). This also includes some templates and css that are (for now) manually copy and pasted in from the designs in https://github.com/jlukic/vax-butler/tree/main/src/designs 
+
+Vaccine info is created by generating a JSON file using the script https://github.com/jlukic/vax-butler/blob/main/src/scrape_locations.js on the URL https://vaccinefinder.nyc.gov/locations. You can do this directly from the chrome console and then paste into https://github.com/jlukic/vax-butler/blob/main/src/vaccine_butler.js
+
+The bookmarklet code is generated manually using [UglifyJS](https://github.com/mishoo/UglifyJS) (Minification) + [Bookmarkleter](https://chriszarate.github.io/bookmarkleter/) (Escaping).
+
+To test modifications locally, I've found the best way is to use the Chrome DevTools [Snippets Panel](https://developer.chrome.com/docs/devtools/javascript/snippets/)on the live site.
+
+Site code is generated using a static site generator and found in `/site` folder. You can run locally using `npm install` then `docpad run`
