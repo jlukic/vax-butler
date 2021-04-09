@@ -22,11 +22,11 @@ docpadConfig = {
       url: "https://vaccinebutler.com"
 
       # Update this flag whenever css/js should be reloaded
-      version: "1.0.9",
+      version: "1.0.10",
 
       # version of code
-      updatedDate: '4/5/2021'
-      packageVersion: "1.0.2",
+      updatedDate: '4/9/2021'
+      packageVersion: "1.0.3",
 
 
       # The default title of our website
