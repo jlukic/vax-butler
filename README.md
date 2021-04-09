@@ -40,7 +40,7 @@ Site code is generated using a static site generator and found in `/site` folder
 
 ## How It Works
 
-This script is relatively simple and has two main loops. The search loop searches the page every (X) seconds by entering information into the zipcode and date field. The check loop, checks the DOM resulting from the search to extract information about each appointment and then check that appointment list against the user's set of constraints. 
+This script is relatively simple and has two main loops. The search loop searches the page every (X) seconds by entering information into the zipcode and date field. The check loop, checks the DOM resulting from the search to extract information about each appointment and then check against the user's set of constraints. 
 
-The original code used mutationobservers to avoid having to "guess" how long loading would take, but we ended up running into issues with the observers not reporting correctly. Perhaps related to [Salesforce Lockerservice](https://developer.salesforce.com/blogs/developer-relations/2016/04/introducing-lockerservice-lightning-components.html) 'security'.  The adapted [`$`](https://github.com/jlukic/vax-butler/blob/main/src/vaccine_butler.js#L38) function is meant to fix 'security' that prevented `document.querySelectorAll` from properly reporting matches. 
+The original code used [mutationobservers](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) to avoid having to "guess" how long loading would take, but we ended up running into issues with the observers not reporting correctly. Perhaps related to [Salesforce Lockerservice](https://developer.salesforce.com/blogs/developer-relations/2016/04/introducing-lockerservice-lightning-components.html) 'security'.  The adapted [`$`](https://github.com/jlukic/vax-butler/blob/main/src/vaccine_butler.js#L38) function is meant to fix 'security' that prevented `document.querySelectorAll` from properly reporting matches. 
 
