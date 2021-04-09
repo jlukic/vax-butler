@@ -14,7 +14,7 @@
 
 ### Version 1.0.3 - April 9, 2021 7PM
 
-NYC's vaccination website has added pretty aggressive rate limiting meaning which means even doing actions without Vaccine Butler seems to be blocked if they occur too frequently.
+NYC's vaccination website has added pretty aggressive rate limiting. It seems to get upset now if you try to refresh the available appointments at a cadence below ~30 seconds. This affects people just regularly using the site, and butler.
 
 We've added settings so users can modify the frequency of checks to avert the rate limiter, and set a much higher default.
 
